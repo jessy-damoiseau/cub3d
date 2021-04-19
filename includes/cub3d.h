@@ -82,6 +82,22 @@ typedef struct	s_nb_wpixel
 	
 }				t_nb_wpixel;
 
+typedef struct	s_sprite
+{
+	double 	distsprite;
+	int 	sprite_on;
+	int 	spritemx;
+	int 	spritemy;
+	int		lineHeightsprite;
+	int		drawStartsprite;
+	int		drawEndsprite;
+	double	wallXsprite;
+	double 	texPossprite;
+	double 	stepsprite;
+	int 	texXsprite;
+	int 	texYsprite;
+}				t_sprite;
+
 typedef struct	s_global
 {
 	t_calcul	calcul;
@@ -90,6 +106,7 @@ typedef struct	s_global
     t_const     constante;
 	t_parsing 	parsing;
 	t_textures	textures;
+	t_sprite 	sprite;
 }				t_global;
 
 void	value_windows_size(t_global *global);
