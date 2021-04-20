@@ -96,6 +96,8 @@ typedef struct	s_sprite
 	double 	stepsprite;
 	int 	texXsprite;
 	int 	texYsprite;
+	double	distx;
+	double	disty;
 }				t_sprite;
 
 typedef struct	s_global
