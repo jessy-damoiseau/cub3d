@@ -15,17 +15,11 @@
 t_file	*ft_lstnew(char *content)
 {
 	t_file	*n;
-	int		i;
 
-	i = 0;
 	if (!(n = (t_file *)malloc(sizeof(*n))))
 		return (0);
 	if (content)
-	{
-		while (content[i])
-			i++;
 		n->line = content;
-	}
 	else
 		n->line = 0;
 	n->next = 0;
