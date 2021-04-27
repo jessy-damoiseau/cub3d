@@ -40,10 +40,6 @@ char	**propagation(int x, int y, char **map, int stop)
 	x_max = 0;
 	while (map[x_max])
 		x_max++;
-	if (x == x_max || x == 0 || !map[x][y + 1] || !map[x][y] ||  y == 0
-	|| map[x][y] == ' ' || map[x + 1][y] == ' ' || map[x - 1][y] == ' '
-	|| map[x][y + 1] == ' ' || map[x][y - 1] == ' ')
-		stop = 1;
 	if (!stop)
 	{
 		map[x][y] = '3';
@@ -56,6 +52,10 @@ char	**propagation(int x, int y, char **map, int stop)
 		if (map[x - 1][y] == '0')
 			propagation(x - 1, y, map, stop);
 	}
+	if (x == x_max || x == 0 || !map[x][y + 1] || !map[x][y] ||  y == 0
+	|| map[x][y] == ' ' || map[x + 1][y] == ' ' || map[x - 1][y] == ' '
+	|| map[x][y + 1] == ' ' || map[x][y - 1] == ' ')
+		stop = 1;
 	return (map);
 }
 
