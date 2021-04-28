@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdamoise <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 15:33:54 by jdamoise          #+#    #+#             */
-/*   Updated: 2021/02/23 20:38:28 by jessy            ###   ########.fr       */
+/*   Updated: 2021/04/28 15:48:31 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@ int		check_r(char *r)
 	return (nb_args);
 }
 
+int		return_nb_args(int nb_args)
+{
+	if (nb_args == 3)
+		return (nb_args + 1);
+	return (nb_args);
+}
+
 int		check_fc(char *str)
 {
 	int nb_args;
@@ -53,11 +60,7 @@ int		check_fc(char *str)
 		if (nb_comma > 2)
 			return (nb_args + 1);
 		if (!ft_isdigit(*str) && *str != ',')
-		{
-			if ( nb_args == 3)
-				return (nb_args + 1);
-			return (nb_args);
-		}
+			return (return_nb_args(nb_args));
 		if (ft_isdigit(*str))
 		{
 			nb_args++;
@@ -69,15 +72,16 @@ int		check_fc(char *str)
 	}
 	return (nb_args);
 }
+
 int		check_spawn(char **map)
 {
 	int i;
 	int j;
 	int	nb_spawn;
 
-	i = 0;
+	i = -1;
 	nb_spawn = 0;
-	while (map[i])
+	while (map[++i])
 	{
 		j = 0;
 		while (map[i][j])
@@ -87,7 +91,6 @@ int		check_spawn(char **map)
 				nb_spawn++;
 			j++;
 		}
-		i++;
 	}
 	if (nb_spawn != 1)
 	{
@@ -103,7 +106,7 @@ int		check_is_param(char *line)
 {
 	if ((line[0] == 'R' && line[1] == ' ') || (line[0] == 'F' && line[1] == ' ')
 	|| (line[0] == 'S' && line[1] == ' ') || (line[0] == 'C' && line[1] == ' ')
-	|| (line[0] == 'N' && line[1] == 'O' && line [2] == ' ')
+	|| (line[0] == 'N' && line[1] == 'O' && line[2] == ' ')
 	|| (line[0] == 'S' && line[1] == 'O' && line[2] == ' ')
 	|| (line[0] == 'W' && line[1] == 'E' && line[2] == ' ')
 	|| (line[0] == 'E' && line[1] == 'A' && line[2] == ' '))

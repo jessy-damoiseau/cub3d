@@ -21,12 +21,11 @@ void	init_sprite(t_sprite *sprite)
 void  print_col(int x, t_parsing *parsing, t_global *global)
 {
 	int y = 0;
-
-
+	
 	while (y < global->pixel.drawStart)
 		global->mlx.addr[y++ * parsing->value.rx + x] = get_color(parsing->value.sky[0], parsing->value.sky[1], parsing->value.sky[2]);
 	
-	if (!global->calcul.side && global->calcul.stepX == -1)
+	if (!global->calcul.side && global->calcul.stepX == 1)
 	{
 		global->textures.texX = (int)(global->textures.wallX * (double)global->textures.xn);
 		if(global->calcul.side == 0 && global->calcul.rayDirX > 0)
@@ -34,7 +33,7 @@ void  print_col(int x, t_parsing *parsing, t_global *global)
 		global->textures.step = 1.0 * global->textures.yn / global->pixel.lineHeight;
 		global->textures.texPos = (global->pixel.drawStart - global->parsing.value.ry / 2 + global->pixel.lineHeight / 2) * global->textures.step;
 	}
-	if (!global->calcul.side && global->calcul.stepX == 1)
+	if (!global->calcul.side && global->calcul.stepX == -1)
 	{
 		global->textures.texX = (int)(global->textures.wallX * (double)global->textures.xso);
 		if(global->calcul.side == 0 && global->calcul.rayDirX > 0)
@@ -42,7 +41,7 @@ void  print_col(int x, t_parsing *parsing, t_global *global)
 		global->textures.step = 1.0 * global->textures.yso / global->pixel.lineHeight;
 		global->textures.texPos = (global->pixel.drawStart - global->parsing.value.ry / 2 + global->pixel.lineHeight / 2) * global->textures.step;
 	}
-	if (global->calcul.side && global->calcul.stepY == -1)
+	if (global->calcul.side && global->calcul.stepY == 1)
 	{
 		global->textures.texX = (int)(global->textures.wallX * (double)global->textures.xw);
 		if(global->calcul.side == 1 && global->calcul.rayDirY < 0) global->textures.texX = global->textures.xw - global->textures.texX - 1;
@@ -50,7 +49,7 @@ void  print_col(int x, t_parsing *parsing, t_global *global)
 		global->textures.step = 1.0 * global->textures.yw / global->pixel.lineHeight;
 		global->textures.texPos = (global->pixel.drawStart - global->parsing.value.ry / 2 + global->pixel.lineHeight / 2) * global->textures.step;
 	}
-	if (global->calcul.side && global->calcul.stepY == 1)
+	if (global->calcul.side && global->calcul.stepY == -1)
 	{
 		global->textures.texX = (int)(global->textures.wallX * (double)global->textures.xe);
 		if(global->calcul.side == 1 && global->calcul.rayDirY < 0) global->textures.texX = global->textures.xe - global->textures.texX - 1;
@@ -60,25 +59,25 @@ void  print_col(int x, t_parsing *parsing, t_global *global)
 	}
 	while (y <= global->pixel.drawEnd)
 	{
-		if (!global->calcul.side && global->calcul.stepX == -1)
+		if (!global->calcul.side && global->calcul.stepX == 1)
 		{
 			global->textures.texY = (int)(global->textures.texPos) & (global->textures.yn - 1);
 			global->textures.texPos += global->textures.step;
 			global->mlx.addr[y * parsing->value.rx + x] = global->mlx.addr_n[global->textures.yn * global->textures.texY + global->textures.texX];
 		}
-		if (!global->calcul.side && global->calcul.stepX == 1)
+		if (!global->calcul.side && global->calcul.stepX == -1)
 		{
 			int texY = (int)(global->textures.texPos) & (global->textures.yso - 1);
 			global->textures.texPos += global->textures.step;
 			global->mlx.addr[y * parsing->value.rx + x] = global->mlx.addr_so[global->textures.yso * texY + global->textures.texX];
 		}
-		if (global->calcul.side && global->calcul.stepY == -1)
+		if (global->calcul.side && global->calcul.stepY == 1)
 		{
 			int texY = (int)(global->textures.texPos) & (global->textures.yw - 1);
 			global->textures.texPos +=global->textures.step;
 			global->mlx.addr[y * parsing->value.rx + x] = global->mlx.addr_w[global->textures.yw * texY + global->textures.texX];
 		}
-		if (global->calcul.side && global->calcul.stepY == 1)
+		if (global->calcul.side && global->calcul.stepY == -1)
 		{
 			int texY = (int)(global->textures.texPos) & (global->textures.ye - 1);
 			global->textures.texPos +=global->textures.step;

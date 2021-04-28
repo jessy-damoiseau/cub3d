@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jessy <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 19:37:39 by jessy             #+#    #+#             */
-/*   Updated: 2021/03/11 23:19:33 by jessy            ###   ########.fr       */
+/*   Updated: 2021/04/28 15:42:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int		cmp(char s, char *set)
 	return (0);
 }
 
-char	*ft_strtrim(char *s, char *set)
+char			*ft_strtrim(char *s, char *set)
 {
 	size_t	i;
 	size_t	j;

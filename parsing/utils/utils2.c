@@ -14,32 +14,28 @@
 
 char	**str_ds_dup(char **str)
 {
-	char **dest;
-	int i;
-	int j;
+	char	**dest;
+	int		i;
+	int		j;
 
 	i = 0;
 	dest = 0;
 	while (str[i])
 		i++;
-	if(!(dest = malloc(sizeof(char *) * (i + 1))))
+	if (!(dest = malloc(sizeof(char *) * (i + 1))))
 		return (0);
-	i = 0;
-	while (str[i])
+	i = -1;
+	while (str[++i])
 	{
 		j = 0;
 		while (str[i][j])
 			j++;
 		if (!(dest[i] = malloc(sizeof(char) * (j + 1))))
 			return (0);
-		j = 0;
-		while(str[i][j])
-		{
+		j = -1;
+		while (str[i][++j])
 			dest[i][j] = str[i][j];
-			j++;
-		}
 		dest[i][j] = '\0';
-		i++;
 	}
 	dest[i] = 0;
 	return (dest);
@@ -47,7 +43,7 @@ char	**str_ds_dup(char **str)
 
 void	free_ds(char **map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (map[i])
@@ -59,8 +55,8 @@ void	free_ds(char **map)
 
 int		find(char c)
 {
-	char *str;
-	int i;
+	char	*str;
+	int		i;
 
 	i = 0;
 	str = "123";
@@ -75,8 +71,8 @@ int		find(char c)
 
 void	value_windows_size(t_global *global)
 {
-	int wx;
-	int wy;
+	int	wx;
+	int	wy;
 
 	mlx_get_screen_size(global->mlx.mlx, &wx, &wy);
 	if (global->parsing.value.rx > wx)
@@ -84,4 +80,3 @@ void	value_windows_size(t_global *global)
 	if (global->parsing.value.ry > wy)
 		global->parsing.value.ry = wy;
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdamoise <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 14:11:30 by jdamoise          #+#    #+#             */
-/*   Updated: 2021/03/22 12:36:38 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/28 15:43:37 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ int		check_hole(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == '3' && (!find(map[i][j + 1]) || !find(map[i][j - 1])
-				|| !find(map[i + 1][j]) || !find(map[i - 1][j])))
+			if (map[i][j] == '3' && (!find(map[i][j + 1])
+			|| !find(map[i][j - 1])
+			|| !find(map[i + 1][j]) || !find(map[i - 1][j])))
 				return (1);
 			j++;
 		}
@@ -52,14 +53,14 @@ char	**propagation(int x, int y, char **map, int stop)
 		if (map[x - 1][y] == '0')
 			propagation(x - 1, y, map, stop);
 	}
-	if (x == x_max || x == 0 || !map[x][y + 1] || !map[x][y] ||  y == 0
+	if (x == x_max || x == 0 || !map[x][y + 1] || !map[x][y] || y == 0
 	|| map[x][y] == ' ' || map[x + 1][y] == ' ' || map[x - 1][y] == ' '
 	|| map[x][y + 1] == ' ' || map[x][y - 1] == ' ')
 		stop = 1;
 	return (map);
 }
 
-int	check_map(char **map)
+int		check_map(char **map)
 {
 	int x;
 	int y;
@@ -67,12 +68,12 @@ int	check_map(char **map)
 
 	x = 0;
 	done = 0;
-	while(map[x] && !done)
+	while (map[x] && !done)
 	{
 		y = 0;
 		while (map[x][y] && !done)
 		{
-			if(map[x][y] == 'N' || map[x][y] == 'W'
+			if (map[x][y] == 'N' || map[x][y] == 'W'
 			|| map[x][y] == 'S' || map[x][y] == 'E')
 				done = 1;
 			else
