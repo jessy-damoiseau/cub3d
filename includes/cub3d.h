@@ -70,6 +70,18 @@ typedef struct        s_xpm
     int                h;
 }                    t_xpm;
 
+typedef struct	s_sprite
+{
+	
+	int		mapx_sprite;
+	int		mapy_sprite;
+	double	sidedistx_sprite;
+	double	sidedisty_sprite;
+	double	spritedist;
+	
+	void	*next;
+}				t_sprite;
+
 
 typedef struct	s_global
 {

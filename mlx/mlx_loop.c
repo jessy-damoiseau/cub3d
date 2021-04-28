@@ -99,6 +99,10 @@ int my_mlx_loop(t_global *global)
 				global->calcul.mapY += global->calcul.stepY;
 				global->calcul.side = 1;
 			}
+			if (parsing->parse.map[global->calcul.mapX][global->calcul.mapY] == '2')
+			{
+				
+			}
 			if(parsing->parse.map[global->calcul.mapX][global->calcul.mapY] == '1')
 				global->calcul.hit = 1;
 		}
