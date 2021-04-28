@@ -41,36 +41,17 @@ typedef struct	s_mlx
 	void	*mlx;
 	void	*win;
 	void	*img;
-	void	*img_n;
-	void	*img_so;
-	void	*img_s;
-	void	*img_w;
-	void	*img_e;
 	int	    *addr;
-	int		*addr_n;
-	int		*addr_so;
-	int		*addr_w;
-	int		*addr_e;
-	int		*addr_s;
 }				t_mlx;
 
 typedef struct	s_textures
 {
-	int		xn;
-	int		yn;
-	int		xso;
-	int		yso;
-	int		xw;
-	int		yw;
-	int		xe;
-	int		ye;
-	int		xs;
-	int		ys;
-	double texPos;
-	double step;
-	int texX;
-	int texY;
-	double wallX;
+	double	texPos;
+	double	step;
+	int 	texX;
+	int		texY;
+	double	wallX;
+	int		texnum;
 }				t_textures;
 
 
@@ -79,26 +60,16 @@ typedef struct	s_nb_wpixel
 	int		lineHeight;
 	int		drawStart;
 	int		drawEnd;
-	
 }				t_nb_wpixel;
 
-typedef struct	s_sprite
+typedef struct        s_xpm
 {
-	double 	distsprite;
-	int 	sprite_on;
-	int 	spritemx;
-	int 	spritemy;
-	int		lineHeightsprite;
-	int		drawStartsprite;
-	int		drawEndsprite;
-	double	wallXsprite;
-	double 	texPossprite;
-	double 	stepsprite;
-	int 	texXsprite;
-	int 	texYsprite;
-	double	distx;
-	double	disty;
-}				t_sprite;
+    void            *img;
+    int             *addr;
+    int                w;
+    int                h;
+}                    t_xpm;
+
 
 typedef struct	s_global
 {
@@ -108,7 +79,7 @@ typedef struct	s_global
     t_const     constante;
 	t_parsing 	parsing;
 	t_textures	textures;
-	t_sprite 	sprite;
+	t_xpm		xpm[5];
 }				t_global;
 
 void	value_windows_size(t_global *global);

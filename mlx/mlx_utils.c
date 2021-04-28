@@ -4,11 +4,11 @@ int	close_mlx(t_global *global)
 {
 	clear_parse(&global->parsing.parse);
 	mlx_destroy_image(global->mlx.mlx, global->mlx.img);
-	mlx_destroy_image(global->mlx.mlx, global->mlx.img_n);
-	mlx_destroy_image(global->mlx.mlx, global->mlx.img_so);
-	mlx_destroy_image(global->mlx.mlx, global->mlx.img_w);
-	mlx_destroy_image(global->mlx.mlx, global->mlx.img_e);
-	mlx_destroy_image(global->mlx.mlx, global->mlx.img_s);
+	mlx_destroy_image(global->mlx.mlx, global->xpm[0].img);
+	mlx_destroy_image(global->mlx.mlx, global->xpm[1].img);
+	mlx_destroy_image(global->mlx.mlx, global->xpm[2].img);
+	mlx_destroy_image(global->mlx.mlx, global->xpm[3].img);
+	mlx_destroy_image(global->mlx.mlx, global->xpm[4].img);
 	mlx_destroy_window(global->mlx.mlx, global->mlx.win);
 	mlx_destroy_display(global->mlx.mlx);
 

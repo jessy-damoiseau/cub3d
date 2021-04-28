@@ -4,25 +4,26 @@ void	init_textures(t_global *global)
 {
 	int trash;
 
-	global->mlx.img_n = mlx_xpm_file_to_image(global->mlx.mlx,
-	global->parsing.parse.no, &global->textures.xn, &global->textures.yn);
-	global->mlx.img_so = mlx_xpm_file_to_image(global->mlx.mlx,
-	global->parsing.parse.so, &global->textures.xso, &global->textures.yso);
-	global->mlx.img_w = mlx_xpm_file_to_image(global->mlx.mlx,
-	global->parsing.parse.we, &global->textures.xw, &global->textures.yw);
-	global->mlx.img_e = mlx_xpm_file_to_image(global->mlx.mlx,
-	global->parsing.parse.ea, &global->textures.xe, &global->textures.ye);
-	global->mlx.img_s = mlx_xpm_file_to_image(global->mlx.mlx,
-	global->parsing.parse.s, &global->textures.xs, &global->textures.ys);
-	global->mlx.addr_n = (int*)mlx_get_data_addr(global->mlx.img_n,
+	global->xpm[0].img = mlx_xpm_file_to_image(global->mlx.mlx,
+	global->parsing.parse.no, &global->xpm[0].w, &global->xpm[0].h);
+	global->xpm[1].img = mlx_xpm_file_to_image(global->mlx.mlx,
+	global->parsing.parse.so, &global->xpm[1].w, &global->xpm[1].h);
+	global->xpm[2].img = mlx_xpm_file_to_image(global->mlx.mlx,
+	global->parsing.parse.we, &global->xpm[2].w, &global->xpm[2].h);
+	global->xpm[3].img = mlx_xpm_file_to_image(global->mlx.mlx,
+	global->parsing.parse.ea, &global->xpm[3].w, &global->xpm[3].h);
+	global->xpm[4].img = mlx_xpm_file_to_image(global->mlx.mlx,
+	global->parsing.parse.s, &global->xpm[4].w, &global->xpm[4].h);
+
+	global->xpm[0].addr = (int*)mlx_get_data_addr(global->xpm[0].img,
 	&trash, &trash, &trash);
-	global->mlx.addr_so = (int*)mlx_get_data_addr(global->mlx.img_so,
+	global->xpm[1].addr = (int*)mlx_get_data_addr(global->xpm[1].img,
 	&trash, &trash, &trash);
-	global->mlx.addr_w = (int*)mlx_get_data_addr(global->mlx.img_w,
+	global->xpm[2].addr = (int*)mlx_get_data_addr(global->xpm[2].img,
 	&trash, &trash, &trash);
-	global->mlx.addr_e = (int*)mlx_get_data_addr(global->mlx.img_e,
+	global->xpm[3].addr = (int*)mlx_get_data_addr(global->xpm[3].img,
 	&trash, &trash, &trash);
-	global->mlx.addr_s = (int*)mlx_get_data_addr(global->mlx.img_s,
+	global->xpm[4].addr = (int*)mlx_get_data_addr(global->xpm[4].img,
 	&trash, &trash, &trash);
 }
 
@@ -37,16 +38,6 @@ void	init_mlx(t_global *global)
 
 void	init_strut_next(t_global *global)
 {
-	global->textures.yn = 0;
-	global->textures.xn = 0;
-	global->textures.yso = 0;
-	global->textures.xso = 0;
-	global->textures.ye = 0;
-	global->textures.xe = 0;
-	global->textures.yw = 0;
-	global->textures.xw = 0;
-	global->textures.ys = 0;
-	global->textures.xs = 0;
 	global->textures.texPos = 0;
 	global->textures.step = 0;
 	global->textures.texX = 0;
