@@ -38,7 +38,8 @@ void	init_calcul(t_global *global, int x)
 	global->calcul.mapY = (int)global->constante.posY;
 	global->calcul.deltaDistX = fabs(1 / global->calcul.rayDirX);
 	global->calcul.deltaDistY = fabs(1 / global->calcul.rayDirY);
-	global->calcul.hit = 0; 
+	global->calcul.hit = 0;
+	global->sprite = 0; 
 }
 
 void	get_texnum(t_global *global)
@@ -100,9 +101,7 @@ int my_mlx_loop(t_global *global)
 				global->calcul.side = 1;
 			}
 			if (parsing->parse.map[global->calcul.mapX][global->calcul.mapY] == '2')
-			{
-				
-			}
+				lst_sprite_addfront(&global->sprite, lst_sprite(global));
 			if(parsing->parse.map[global->calcul.mapX][global->calcul.mapY] == '1')
 				global->calcul.hit = 1;
 		}

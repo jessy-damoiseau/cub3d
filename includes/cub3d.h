@@ -72,13 +72,11 @@ typedef struct        s_xpm
 
 typedef struct	s_sprite
 {
-	
 	int		mapx_sprite;
 	int		mapy_sprite;
 	double	sidedistx_sprite;
 	double	sidedisty_sprite;
 	double	spritedist;
-	
 	void	*next;
 }				t_sprite;
 
@@ -92,15 +90,18 @@ typedef struct	s_global
 	t_parsing 	parsing;
 	t_textures	textures;
 	t_xpm		xpm[5];
+	t_sprite	*sprite;
 }				t_global;
 
-void	value_windows_size(t_global *global);
-int		close_mlx(t_global *global);
-int		get_color(int r, int g, int b);
-int		keypress(int keycode, t_mlx *mlx);
-int		keyrelease(int keycode, t_mlx *mlx);
-int 	my_mlx_loop(t_global *global);
-void	init_mlx(t_global *global);
-void	print_minimap(t_global *global);
+void			value_windows_size(t_global *global);
+int				close_mlx(t_global *global);
+int				get_color(int r, int g, int b);
+int				keypress(int keycode, t_mlx *mlx);
+int				keyrelease(int keycode, t_mlx *mlx);
+int 			my_mlx_loop(t_global *global);
+void			init_mlx(t_global *global);
+void			print_minimap(t_global *global);
+t_sprite    	*lst_sprite(t_global *global);
+void    		lst_sprite_addfront(t_sprite **alst, t_sprite *new);
 
 #endif

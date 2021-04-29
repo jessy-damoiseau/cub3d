@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/15 00:53:32 by jessy             #+#    #+#              #
-#    Updated: 2021/04/28 15:54:12 by user42           ###   ########.fr        #
+#    Updated: 2021/04/28 22:36:47 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS = 	parsing/check_error.c\
 		mlx/mlx_loop.c\
 		mlx/mlx_utils.c\
 		mlx/print_map.c\
+		mlx/mlx_sprite_list.c\
 		\
 		main.c\
 
