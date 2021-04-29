@@ -9,30 +9,30 @@
 
 typedef struct	s_calcul
 {
-	double	cameraX;
-	double	rayDirX;
-	double	rayDirY;
-	int		mapX;
-	int		mapY;
-	double	sideDistX;
-	double	sideDistY;
-	double	deltaDistX;
-	double	deltaDistY;
-	double	perpWallDist;
-	int		stepX;
-	int		stepY;
+	double	camerax;
+	double	raydirx;
+	double	raydiry;
+	int		mapx;
+	int		mapy;
+	double	sidedistx;
+	double	sidedisty;
+	double	deltadistx;
+	double	deltadisty;
+	double	perpwalldist;
+	int		stepx;
+	int		stepy;
 	int		hit;
 	int		side;
 }				t_calcul;
 
 typedef struct  s_const
 {
-        double  posX;
-        double  posY;
-        double  dirX;
-        double  dirY;
-        double  planeX;
-        double  planeY;
+        double  posx;
+        double  posy;
+        double  dirx;
+        double  diry;
+        double  planex;
+        double  planey;
 }               t_const;
 
 typedef struct	s_mlx
@@ -46,20 +46,20 @@ typedef struct	s_mlx
 
 typedef struct	s_textures
 {
-	double	texPos;
+	double	texpos;
 	double	step;
-	int 	texX;
-	int		texY;
-	double	wallX;
+	int 	texx;
+	int		texy;
+	double	wallx;
 	int		texnum;
 }				t_textures;
 
 
 typedef struct	s_nb_wpixel
 {
-	int		lineHeight;
-	int		drawStart;
-	int		drawEnd;
+	int		lineheight;
+	int		drawstart;
+	int		drawend;
 }				t_nb_wpixel;
 
 typedef struct        s_xpm
@@ -70,14 +70,28 @@ typedef struct        s_xpm
     int                h;
 }                    t_xpm;
 
+typedef struct	s_csprite
+{
+	double	texpos;
+	double	step;
+	int 	texx;
+	int		texy;
+	double	wallx;
+}				t_csprite;
+
 typedef struct	s_sprite
 {
-	int		mapx_sprite;
-	int		mapy_sprite;
-	double	sidedistx_sprite;
-	double	sidedisty_sprite;
-	double	spritedist;
-	void	*next;
+	double			mapx_sprite;
+	double			mapy_sprite;
+	double			sidedistx_sprite;
+	double			sidedisty_sprite;
+	int 			draws_start;
+	int				draws_end;
+	int				lineheight;
+	double			spritedist;
+	int				side;
+
+	struct s_sprite	*next;
 }				t_sprite;
 
 
@@ -91,6 +105,7 @@ typedef struct	s_global
 	t_textures	textures;
 	t_xpm		xpm[5];
 	t_sprite	*sprite;
+	t_csprite	csprite;
 }				t_global;
 
 void			value_windows_size(t_global *global);
@@ -103,5 +118,6 @@ void			init_mlx(t_global *global);
 void			print_minimap(t_global *global);
 t_sprite    	*lst_sprite(t_global *global);
 void    		lst_sprite_addfront(t_sprite **alst, t_sprite *new);
+void    		lst_sclear(t_sprite **lst);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 22:20:12 by user42            #+#    #+#             */
-/*   Updated: 2021/04/28 22:34:37 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/29 17:24:26 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,25 @@
 t_sprite    *lst_sprite(t_global *global)
 {
     t_sprite *lst;
+    
     if (!(lst = malloc(sizeof(t_sprite))))
         return (0);
-    lst->mapx_sprite = global->calcul.mapX;
-    lst->mapy_sprite = global->calcul.mapY;
-    lst->sidedistx_sprite = global->calcul.sideDistX;
-    lst->sidedisty_sprite = global->calcul.sideDistY;
+    lst->mapx_sprite = global->calcul.mapx + 0.5;
+    lst->mapy_sprite = global->calcul.mapy + 0.5;
+    lst->sidedistx_sprite = global->calcul.sidedistx;
+    lst->sidedisty_sprite = global->calcul.sidedisty;
+    lst->side = global->calcul.side;
     if (global->calcul.side)
-        lst->spritedist = fabs(lst->mapx_sprite - global->constante.posX);
+        lst->spritedist = fabs(lst->sidedisty_sprite + 0.5 - global->constante.posy);
     else
-        lst->spritedist = fabs(lst->mapx_sprite - global->constante.posX);
+        lst->spritedist = fabs(lst->sidedistx_sprite + 0.5 - global->constante.posx);
+    lst->lineheight = (int)(global->parsing.value.ry / lst->spritedist);
+	lst->draws_start = -lst->lineheight / 2 + global->parsing.value.ry / 2;
+	if(lst->draws_start < 0)
+		lst->draws_start = 0;
+	lst->draws_end = lst->lineheight / 2 + global->parsing.value.ry / 2;
+	if(lst->draws_end >= global->parsing.value.ry)
+		lst->draws_end = global->parsing.value.ry - 1;
     lst->next = 0;
     return (lst);
 }
@@ -33,4 +42,17 @@ void    lst_sprite_addfront(t_sprite **alst, t_sprite *new)
 {
     new->next = *alst;
     *alst = new;
+}
+
+void    lst_sclear(t_sprite **lst)
+{ 
+    t_sprite *now_list;
+
+	while (*lst)
+	{
+		now_list = *lst;
+		*lst = now_list->next;
+		free(now_list);
+	}
+	lst = 0;  
 }

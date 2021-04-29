@@ -3,7 +3,7 @@ C 173,216,230
 F 125,125,125
 WE ./textures/mossy.xpm
 NO ./textures/wood.xpm
-S ./textures/pillar.xpm
+S ./textures/tonneau.xpm
 SO ./textures/redbrick.xpm
 EA ./textures/greystone.xpm
 

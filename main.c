@@ -38,39 +38,39 @@ void	init_mlx(t_global *global)
 
 void	init_strut_next(t_global *global)
 {
-	global->textures.texPos = 0;
+	global->textures.texpos = 0;
 	global->textures.step = 0;
-	global->textures.texX = 0;
-	global->textures.texY = 0;
-	global->textures.wallX = 0;
+	global->textures.texx = 0;
+	global->textures.texy = 0;
+	global->textures.wallx = 0;
 }
 
 
 void	init_struct(t_global *global)
 {
-	global->calcul.cameraX = 0;
-	global->calcul.rayDirX = 0;
-	global->calcul.rayDirY = 0;
-	global->calcul.mapX = 0;
-	global->calcul.mapY = 0;
-	global->calcul.sideDistX = 0;
-	global->calcul.sideDistY = 0;
-	global->calcul.deltaDistX = 0;
-	global->calcul.deltaDistY = 0;
-	global->calcul.perpWallDist = 0;
-	global->calcul.stepX = 0;
-	global->calcul.stepY = 0;
+	global->calcul.camerax = 0;
+	global->calcul.raydirx = 0;
+	global->calcul.raydiry = 0;
+	global->calcul.mapx = 0;
+	global->calcul.mapy = 0;
+	global->calcul.sidedistx = 0;
+	global->calcul.sidedisty = 0;
+	global->calcul.deltadistx = 0;
+	global->calcul.deltadisty = 0;
+	global->calcul.perpwalldist = 0;
+	global->calcul.stepx = 0;
+	global->calcul.stepx = 0;
 	global->calcul.hit = 0;
 	global->calcul.side = 0;
-	global->constante.posX = 0;
-	global->constante.posY = 0;
-	global->constante.dirX = 0;
-	global->constante.dirY = 0;
-	global->constante.planeX = 0;
-	global->constante.planeY = 0;
-	global->pixel.lineHeight = 0;
-	global->pixel.drawStart = 0;
-	global->pixel.drawEnd = 0;
+	global->constante.posx = 0;
+	global->constante.posy = 0;
+	global->constante.dirx = 0;
+	global->constante.diry = 0;
+	global->constante.planex = 0;
+	global->constante.planey = 0;
+	global->pixel.lineheight = 0;
+	global->pixel.drawstart = 0;
+	global->pixel.drawend = 0;
 	init_strut_next(global);
 }
 
@@ -105,38 +105,38 @@ void	get_dir(t_global *global)
 {
 	char c;
 
-	c = global->parsing.parse.map[(int)global->constante.posX]
-	[(int)global->constante.posY];
+	c = global->parsing.parse.map[(int)global->constante.posx]
+	[(int)global->constante.posy];
 	if (c == 'N')
 	{
-		global->constante.dirX = -1, global->constante.dirY = 0;
-		global->constante.planeX = 0, global->constante.planeY = 0.9;
+		global->constante.dirx = -1, global->constante.diry = 0;
+		global->constante.planex = 0, global->constante.planey = 0.9;
 	}
 	if (c == 'S')
 	{
-		global->constante.dirX = 1, global->constante.dirY = 0;
-		global->constante.planeX = 0, global->constante.planeY = -0.9;
+		global->constante.dirx = 1, global->constante.diry = 0;
+		global->constante.planex = 0, global->constante.planey = -0.9;
 	}
 	if (c == 'W')
 	{
-		global->constante.dirX = 0, global->constante.dirY = -1;
-		global->constante.planeX = -0.9, global->constante.planeY = 0;
+		global->constante.dirx = 0, global->constante.diry = -1;
+		global->constante.planex = -0.9, global->constante.planey = 0;
 	}
 	if (c == 'E')
 	{
-		global->constante.dirX = 0, global->constante.dirY = 1;
-		global->constante.planeX = 0.9, global->constante.planeY = 0;
+		global->constante.dirx = 0, global->constante.diry = 1;
+		global->constante.planex = 0.9, global->constante.planey = 0;
 	}
 }
 
 void	init_constante(t_global *global)
 {
 
-	global->constante.posX = get_spawn(global->parsing.parse.map, 0) + 0.5;
-	global->constante.posY = get_spawn(global->parsing.parse.map, 1) + 0.5;
+	global->constante.posx = get_spawn(global->parsing.parse.map, 0) + 0.5;
+	global->constante.posy = get_spawn(global->parsing.parse.map, 1) + 0.5;
 	get_dir(global);
-	global->parsing.parse.map[(int)global->constante.posX]
-	[(int)global->constante.posY] = '0';
+	global->parsing.parse.map[(int)global->constante.posx]
+	[(int)global->constante.posy] = '0';
 }
 
 int main(int ac, char **av)

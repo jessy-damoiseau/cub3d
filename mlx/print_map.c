@@ -1,12 +1,12 @@
-/**************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   print_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <jdamoise@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 13:43:14 by user42            #+#    #+#             */
-/*   Updated: 2021/03/22 16:07:24 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/29 14:34:11 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,5 @@ void	print_minimap(t_global *global)
 		}
 		y_pixel += 9;
 	}
-	global->mlx.addr[(int)(global->constante.posX * 9) * global->parsing.value.rx  + (int)(global->constante.posY * 9 )] = get_color(255, 0, 0);
+	global->mlx.addr[(int)(global->constante.posx * 9) * global->parsing.value.rx  + (int)(global->constante.posy * 9 )] = get_color(255, 0, 0);
 }
