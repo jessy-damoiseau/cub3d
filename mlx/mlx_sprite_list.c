@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 22:20:12 by user42            #+#    #+#             */
-/*   Updated: 2021/04/29 19:56:58 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/01 02:56:01 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_sprite    *lst_sprite(t_global *global)
     lst->sidedistx_sprite = global->calcul.sidedistx;
     lst->sidedisty_sprite = global->calcul.sidedisty;
     lst->side = global->calcul.side;
+    lst->nbhit = 0;
     lst->spritedist = sqrt(pow((global->constante.posx - lst->mapx_sprite), 2) + pow((global->constante.posy - lst->mapy_sprite), 2));
     lst->lineheight = (int)(global->parsing.value.ry / lst->spritedist);
 	lst->draws_start = -lst->lineheight / 2 + global->parsing.value.ry / 2;

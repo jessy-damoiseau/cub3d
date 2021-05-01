@@ -25,45 +25,6 @@ void    print_col(t_global *global, t_parsing *parsing, int x)
 		parsing->value.floor[1], parsing->value.floor[2]);
 }
 
-void	init_csprite(t_csprite *csprite)
-{
-	csprite->step = 0;
-	csprite->texpos = 0;
-	csprite->texx = 0;
-	csprite->texy = 0;
-	csprite->wallx = 0;
-}
-
-void        print_sprite(t_global *global, int y, int x, t_sprite *tmp)
-{
-    while (global->sprite)
-    {
-		init_csprite(&global->csprite);
-        if (global->sprite->side == 0)
-            global->csprite.wallx = global->constante.posy + global->sprite->spritedist * global->calcul.raydiry;
-        else
-            global->csprite.wallx = global->constante.posx + global->sprite->spritedist * global->calcul.raydirx;
-        global->csprite.wallx -= floor(global->csprite.wallx);
-        global->csprite.texx = (int)(global->csprite.wallx * (double)global->xpm[4].w);
-        if (global->sprite->side == 0 && global->calcul.raydirx > 0)
-            global->csprite.texx = global->xpm[4].w - global->csprite.texx - 1;
-        if (global->sprite->side == 1 && global->calcul.raydiry < 0)
-            global->csprite.texx = global->xpm[4].w - global->csprite.texx - 1;
-        global->csprite.step = 1.0 * global->xpm[4].h / global->sprite->lineheight;
-        global->csprite.texpos = (global->sprite->draws_start - global->parsing.value.ry / 2 + global->sprite->lineheight / 2) * global->csprite.step;
-        y = global->sprite->draws_start;
-        while (y <= global->sprite->draws_end)
-        {
-            global->csprite.texy = (int)global->csprite.texpos & (global->xpm[4].h - 1);
-            global->csprite.texpos += global->csprite.step;
-            if (global->xpm[4].addr[global->xpm[4].h * global->csprite.texy + global->csprite.texx])
-                global->mlx.addr[y * global->parsing.value.rx + x] = global->xpm[4].addr[global->xpm[4].h * global->csprite.texy + global->csprite.texx];
-            y++;
-        }
-        global->sprite = global->sprite->next;
-    }
-    global->sprite = tmp;
-}
 void	init_calcul(t_global *global, int x)
 {
 	global->calcul.camerax = 2 * x / (double)global->parsing.value.rx - 1; 
@@ -75,8 +36,7 @@ void	init_calcul(t_global *global, int x)
 	global->calcul.mapy = (int)global->constante.posy;
 	global->calcul.deltadistx = fabs(1 / global->calcul.raydirx);
 	global->calcul.deltadisty = fabs(1 / global->calcul.raydiry);
-	global->calcul.hit = 0;
-	global->sprite = 0; 
+	global->calcul.hit = 0; 
 }
 
 void	get_texnum(t_global *global)
@@ -91,12 +51,61 @@ void	get_texnum(t_global *global)
 		global->textures.texnum = 3;
 }
 
+void	sort_order(t_pair *orders, int amount)
+{
+	t_pair	tmp;
+
+	for (int i = 0; i < amount; i++)
+	{
+		for (int j = 0; j < amount - 1; j++)
+		{
+			if (orders[j].first > orders[j + 1].first)
+			{
+				tmp.first = orders[j].first;
+				tmp.second = orders[j].second;
+				orders[j].first = orders[j + 1].first;
+				orders[j].second = orders[j + 1].second;
+				orders[j + 1].first = tmp.first;
+				orders[j + 1].second = tmp.second;
+			}
+		}
+	}
+}
+
+void	sortSprites(int *order, double *dist, int amount)
+{
+	t_pair	*sprites;
+
+	sprites = (t_pair*)malloc(sizeof(t_pair) * amount);
+	for (int i = 0; i < amount; i++)
+	{
+		sprites[i].first = dist[i];
+		sprites[i].second = order[i];
+	}
+	sort_order(sprites, amount);
+	for (int i = 0; i < amount; i++)
+	{
+		dist[i] = sprites[amount - i - 1].first;
+		order[i] = sprites[amount - i - 1].second;
+	}
+	free(sprites);
+}
+
 int my_mlx_loop(t_global *global)
 {
 	t_parsing *parsing;
 
 	parsing = &global->parsing;
 	int x = 0;
+
+	global->sprite->x = 2.5;
+	global->sprite->y = 14.5;
+	int numSprites = 1;
+	double ZBuffer[parsing->value.rx];
+	int spriteOrder[numSprites];
+	double spriteDistance[1];
+
+
 	if (global->mlx.tab[307])
 		close_mlx(global);
 	while (x < parsing->value.rx)
@@ -137,8 +146,6 @@ int my_mlx_loop(t_global *global)
 				global->calcul.mapy += global->calcul.stepy;
 				global->calcul.side = 1;
 			}
-			if (parsing->parse.map[global->calcul.mapx][global->calcul.mapy] == '2')
-				lst_sprite_addfront(&global->sprite, lst_sprite(global));
 			if(parsing->parse.map[global->calcul.mapx][global->calcul.mapy] == '1')
 				global->calcul.hit = 1;
 		}
@@ -153,15 +160,12 @@ int my_mlx_loop(t_global *global)
 		global->pixel.drawend = global->pixel.lineheight / 2 + parsing->value.ry / 2;
 		if(global->pixel.drawend >= parsing->value.ry)
 			global->pixel.drawend = parsing->value.ry - 1;
-
 		get_texnum(global);
-
       	if(global->calcul.side == 0)
 			global->textures.wallx = global->constante.posy + global->calcul.perpwalldist * global->calcul.raydiry;
       	else          
 			global->textures.wallx = global->constante.posx + global->calcul.perpwalldist * global->calcul.raydirx;
 		global->textures.wallx -= floor((global->textures.wallx));
-
 		global->textures.texx = (int)(global->textures.wallx *
         (double)global->xpm[global->textures.texnum].w);
 
@@ -174,13 +178,59 @@ int my_mlx_loop(t_global *global)
         global->pixel.lineheight;
     	global->textures.texpos = (global->pixel.drawstart - parsing->value.ry /
         2 + global->pixel.lineheight / 2) * global->textures.step;
-
 		print_col(global, parsing, x);
-		if (global->sprite)
-			print_sprite(global, 0, x, global->sprite);
-		lst_sclear(&global->sprite);
+	  ZBuffer[x] = global->calcul.perpwalldist;
 		x++;
 	}
+
+	for(int i = 0; i < numSprites; i++)
+    {
+      spriteOrder[i] = i;
+      spriteDistance[i] = ((global->constante.posx - global->sprite[i].x) * (global->constante.posx - global->sprite[i].x) + (global->constante.posy - global->sprite[i].y) * (global->constante.posy - global->sprite[i].y));
+    }
+    sortSprites(spriteOrder, spriteDistance, numSprites);
+
+    for(int i = 0; i < numSprites; i++)
+    {
+      double spriteX = global->sprite[spriteOrder[i]].x - global->constante.posx;
+      double spriteY = global->sprite[spriteOrder[i]].y - global->constante.posy;
+
+      double invDet = 1.0 / (global->constante.planex * global->constante.diry - global->constante.dirx * global->constante.planey);
+
+      double transformX = invDet * (global->constante.diry * spriteX - global->constante.dirx * spriteY);
+      double transformY = invDet * (-global->constante.planey * spriteX + global->constante.planex * spriteY);
+
+      int spriteScreenX = (int)((parsing->value.rx / 2) * (1 + transformX / transformY));
+
+      #define uDiv 1
+      #define vDiv 1
+      #define vMove 0.0
+      int vMoveScreen = (int)(vMove / transformY);
+      int spriteHeight = abs((int)(parsing->value.ry / (transformY))) / vDiv;
+      int drawStartY = -spriteHeight / 2 + parsing->value.ry / 2 + vMoveScreen;
+      if(drawStartY < 0) drawStartY = 0;
+      int drawEndY = spriteHeight / 2 + parsing->value.ry / 2 + vMoveScreen;
+      if(drawEndY >= parsing->value.ry) drawEndY = parsing->value.ry - 1;
+
+      int spriteWidth = abs((int)(parsing->value.ry / (transformY))) / uDiv;
+      int drawStartX = -spriteWidth / 2 + spriteScreenX;
+      if(drawStartX < 0) drawStartX = 0;
+      int drawEndX = spriteWidth / 2 + spriteScreenX;
+      if(drawEndX >= parsing->value.rx) drawEndX = parsing->value.ry - 1;
+
+      for(int stripe = drawStartX; stripe < drawEndX; stripe++)
+      {
+        int texX = (int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * global->xpm[4].w / spriteWidth) / 256;
+        if(transformY > 0 && stripe > 0 && stripe < parsing->value.rx && transformY < ZBuffer[stripe])
+        for(int y = drawStartY; y < drawEndY; y++)
+        {
+          int d = (y-vMoveScreen) * 256 - parsing->value.ry * 128 + spriteHeight * 128;
+          int texY = ((d * global->xpm[global->textures.texnum].h) / spriteHeight) / 256;
+		  if (global->xpm[4].addr[global->xpm[global->textures.texnum].w * texY + texX])
+          	global->mlx.addr[y * parsing->value.rx + stripe] = global->xpm[4].addr[global->xpm[global->textures.texnum].w * texY + texX];
+        }
+      }
+    }
 	print_minimap(global);
 	mlx_put_image_to_window(global->mlx.mlx, global->mlx.win, global->mlx.img, 0, 0);
 

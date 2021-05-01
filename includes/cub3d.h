@@ -79,7 +79,7 @@ typedef struct	s_csprite
 	double	wallx;
 }				t_csprite;
 
-typedef struct	s_sprite
+/*typedef struct	s_sprite
 {
 	double			mapx_sprite;
 	double			mapy_sprite;
@@ -90,9 +90,21 @@ typedef struct	s_sprite
 	int				lineheight;
 	double			spritedist;
 	int				side;
-
+	int				nbhit;
 	struct s_sprite	*next;
+}				t_sprite;*/
+
+typedef struct s_sprite
+{
+  double x;
+  double y;
 }				t_sprite;
+
+typedef struct		s_pair
+{
+	double	first;
+	int		second;
+}					t_pair;
 
 
 typedef struct	s_global
@@ -104,7 +116,7 @@ typedef struct	s_global
 	t_parsing 	parsing;
 	t_textures	textures;
 	t_xpm		xpm[5];
-	t_sprite	*sprite;
+	t_sprite	sprite[2];
 	t_csprite	csprite;
 }				t_global;
 
