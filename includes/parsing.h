@@ -74,7 +74,7 @@ int				check_fc(char *str);
 int				check_spawn(char **map);
 int				check_is_param(char *line);
 int				check_map(char **map);
-char			**propagation(int x, int y, char **map, int stop);
+int				propagation(int x, int y, char **map, int stop);
 int				check_hole(char **map);
 char			*ft_strtrim(char *s, char *set);
 t_file			*ft_lstnew(char *content);

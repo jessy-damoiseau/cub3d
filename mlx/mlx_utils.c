@@ -11,7 +11,7 @@ int	close_mlx(t_global *global)
 	mlx_destroy_image(global->mlx.mlx, global->xpm[4].img);
 	mlx_destroy_window(global->mlx.mlx, global->mlx.win);
 	mlx_destroy_display(global->mlx.mlx);
-
+	free(global->sprite);
 	free(global->mlx.mlx);
 	exit(0);
 }

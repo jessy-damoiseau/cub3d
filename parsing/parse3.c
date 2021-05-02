@@ -66,7 +66,6 @@ int	check_error_next2(int nb_error, t_parsing *global)
 	nb_spawn = check_spawn(global->parse.map);
 	if (nb_spawn)
 	{
-		fprintf(stderr, "check13.1\n");
 		if (nb_spawn < 0)
 			fprintf(stderr, "Error: Empty spawn point\n");
 		else

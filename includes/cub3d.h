@@ -1,11 +1,20 @@
 #ifndef CUB3D_H
-#define CUB3D_H
+# define CUB3D_H
 
 # include <math.h>
 # include "parsing.h"
 # include "../minilibx-linux/mlx.h"
 
 # define FOV 0.9
+# define uDiv 1
+# define vDiv 1
+# define vMove 0.0
+# define MOVESPEED 0.05
+# define ROTSPEED 0.03
+# define KEY_W 119
+# define KEY_S 115
+# define KEY_A 97
+# define KEY_D 100
 
 typedef struct	s_calcul
 {
@@ -33,6 +42,7 @@ typedef struct  s_const
         double  diry;
         double  planex;
         double  planey;
+		int 	nsprites;
 }               t_const;
 
 typedef struct	s_mlx
@@ -70,29 +80,30 @@ typedef struct        s_xpm
     int                h;
 }                    t_xpm;
 
+
 typedef struct	s_csprite
 {
-	double	texpos;
-	double	step;
-	int 	texx;
-	int		texy;
-	double	wallx;
+	double *zbuffer;
+	int *spriteorder;
+	double *spritedistance;
+	double spritex;
+	double spritey;
+	double invdet;
+	double transformx;
+	double transformy;
+	int spritescreenx;
+	int vmovescreen;
+	int spriteheight;
+	int drawstarty;
+	int drawendy;
+	int spritewidth;
+	int drawstartx;
+	int drawendx;
+	int texx;
+	int d;
+	int texy;
 }				t_csprite;
 
-/*typedef struct	s_sprite
-{
-	double			mapx_sprite;
-	double			mapy_sprite;
-	double			sidedistx_sprite;
-	double			sidedisty_sprite;
-	int 			draws_start;
-	int				draws_end;
-	int				lineheight;
-	double			spritedist;
-	int				side;
-	int				nbhit;
-	struct s_sprite	*next;
-}				t_sprite;*/
 
 typedef struct s_sprite
 {
@@ -116,7 +127,7 @@ typedef struct	s_global
 	t_parsing 	parsing;
 	t_textures	textures;
 	t_xpm		xpm[5];
-	t_sprite	sprite[2];
+	t_sprite	*sprite;
 	t_csprite	csprite;
 }				t_global;
 
