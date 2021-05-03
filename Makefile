@@ -6,11 +6,11 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/15 00:53:32 by jessy             #+#    #+#              #
-#    Updated: 2021/05/03 17:30:12 by user42           ###   ########.fr        #
+#    Updated: 2021/05/03 21:17:44 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
+NAME = cub3D
 
 SRCS = 	parsing/check_error.c\
 		parsing/check_map.c\
