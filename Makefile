@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/15 00:53:32 by jessy             #+#    #+#              #
-#    Updated: 2021/05/01 04:26:48 by user42           ###   ########.fr        #
+#    Updated: 2021/05/03 16:57:09 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,14 @@ SRCS = 	parsing/check_error.c\
 		parsing/utils/utils2.c\
 		parsing/init.c\
 		\
-		mlx/mlx_loop.c\
-		mlx/mlx_utils.c\
-		mlx/print_map.c\
+		srcs/mlx_loop.c\
+		srcs/mlx_utils.c\
+		srcs/mlx_utils2.c\
+		srcs/init_for_calcul.c\
+		srcs/init_for_calcul2.c\
+		srcs/mlx_move.c\
+		srcs/mlx_print.c\
+		srcs/print_col.c\
 		\
 		main.c\
 

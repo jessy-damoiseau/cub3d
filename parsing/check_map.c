@@ -6,13 +6,13 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 14:11:30 by jdamoise          #+#    #+#             */
-/*   Updated: 2021/04/28 15:43:37 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/02 04:56:57 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int		check_hole(char **map)
+int	check_hole(char **map)
 {
 	int i;
 	int j;
@@ -61,7 +61,7 @@ int	propagation(int x, int y, char **map, int stop)
 	return (check_hole(map));
 }
 
-int		check_map(char **map)
+int	check_map(char **map)
 {
 	int x;
 	int y;

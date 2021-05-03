@@ -15,6 +15,8 @@
 # define KEY_S 115
 # define KEY_A 97
 # define KEY_D 100
+# define KEY_RIGTHROT 39
+# define KEY_LEFTROT 59
 
 typedef struct	s_calcul
 {
@@ -104,8 +106,7 @@ typedef struct	s_csprite
 	int texy;
 }				t_csprite;
 
-
-typedef struct s_sprite
+typedef struct	s_sprite
 {
   double x;
   double y;
@@ -131,16 +132,42 @@ typedef struct	s_global
 	t_csprite	csprite;
 }				t_global;
 
-void			value_windows_size(t_global *global);
-int				close_mlx(t_global *global);
-int				get_color(int r, int g, int b);
-int				keypress(int keycode, t_mlx *mlx);
-int				keyrelease(int keycode, t_mlx *mlx);
-int 			my_mlx_loop(t_global *global);
-void			init_mlx(t_global *global);
-void			print_minimap(t_global *global);
-t_sprite    	*lst_sprite(t_global *global);
-void    		lst_sprite_addfront(t_sprite **alst, t_sprite *new);
-void    		lst_sclear(t_sprite **lst);
+void	value_windows_size(t_global *global);
+void	init_textures(t_global *global);
+void	init_mlx(t_global *global);
+void	init_strut_next(t_global *global);
+void	init_struct(t_global *global);
+void	init_constante(t_global *global);
+void	get_dir2(t_global *global, char c);
+void	get_dir(t_global *global);
+void	check_hit(t_global *global, t_parsing *parsing);
+void	calcul_perpandlentext(t_global *global, t_parsing *parsing);
+void	calculfortex(t_global *global, t_parsing *parsing);
+int		my_mlx_loop2(t_global *global);
+int		my_mlx_loop(t_global *global);
+void	check_move4(t_global *global);
+void	check_move3(t_global *global);
+void	check_move2(t_global *global, t_parsing *parsing);
+void	check_move(t_global *global, t_parsing *parsing);
+void	take_raystepsidedist(t_global *global);
+void	first_part_sprite(t_global *global);
+void	calcul_sprite(t_global *global, t_parsing *parsing, int i);
+void	calcul_lensprite(t_global *global, t_parsing *parsing);
+void	fill_addr(t_global *global, t_parsing *parsing);
+void	print_sprite(t_global *global, t_parsing *parsing);
+int		close_mlx(t_global *global);
+int		get_color(int r, int g, int b);
+int		keypress(int keycode, t_mlx *mlx);
+int		keyrelease(int keycode, t_mlx *mlx);
+void	free_sprite(t_global *global);
+void	init_calcul(t_global *global, int x);
+void	get_texnum(t_global *global);
+void	sort_order(t_pair *orders, int amount);
+void	sortsprites(t_global *global);
+int		malloc_sprite(t_global *global, t_parsing *parsing);
+void	print_col(t_global *global, t_parsing *parsing, int x);
+int		get_spawn(char **map, int i);
+void	check_sprite2(t_global *global);
+void	check_sprite(t_global *global);
 
 #endif
