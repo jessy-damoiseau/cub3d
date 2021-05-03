@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 16:09:14 by user42            #+#    #+#             */
-/*   Updated: 2021/05/02 05:11:32 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/03 18:20:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct	s_value
 	int		ry;
 	int		floor[3];
 	int		sky[3];
+	int		save;
 }				t_value;
 
 typedef struct	s_parsing
@@ -61,7 +62,7 @@ void			*ft_memmove(void *dst, void *src, size_t len);
 char			*ft_strjoin(char *s1, char *s2);
 int				check_return(char *str);
 int				parse(int ac, t_parsing *global, char **arg);
-int				check_file(int ac, char **arg);
+int				check_file(int ac, char **arg, t_parsing *global);
 int				get_param(t_parsing *global);
 int				fill_struct_param(char *param, t_parse *parse);
 int				check_error(t_parsing *global);

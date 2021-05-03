@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 15:52:09 by user42            #+#    #+#             */
-/*   Updated: 2021/04/28 15:53:51 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/03 20:28:37 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ int	check_error_next2(int nb_error, t_parsing *global)
 	}
 	else
 	{
-		if (check_map(str_ds_dup(global->parse.map)))
+		if (check_map(str_ds_dup(fill_space_map(global))))
 		{
-			fprintf(stderr, "Error: map non valide\n");
+			fprintf(stderr, "Error: invalid map\n");
 			nb_error++;
 		}
 	}
@@ -89,12 +89,12 @@ int	check_error_next(int nb_error, t_parsing *global)
 {
 	if (!check_textures(global))
 	{
-		fprintf(stderr, "Error: l'une des textures n'existe pas\n");
+		fprintf(stderr, "Error: one of the textures doesn't exist\n");
 		nb_error++;
 	}
 	if (check_fc(global->parse.c) != 3 || check_fc(global->parse.f) != 3)
 	{
-		fprintf(stderr, "Error: -F/C: pas le bon nombre d'argument\n");
+		fprintf(stderr, "Error:-F/C: not the right number of arguments\n");
 		nb_error++;
 	}
 	return (check_error_next2(nb_error, global));
@@ -107,13 +107,13 @@ int	check_error(t_parsing *global)
 	nb_error = 0;
 	if (check_r(global->parse.r) != 2)
 	{
-		fprintf(stderr, "Error: -R: pas le bon nombre d'argument\n");
+		fprintf(stderr, "Error:-R: not the right number of arguments\n");
 		nb_error++;
 	}
 	if (check_args_texture(global))
 	{
 		fprintf(stderr,
-		"Error: -NO/SO/WE/AE/S: Pas le bon nombre d'argument\n");
+		"Error:-NO/SO/WE/AE/S: not the right number of arguments\n");
 		nb_error++;
 	}
 	if (!ft_strcmp(&global->parse.no[ft_strlen(global->parse.no) - 4], ".xpm")
@@ -122,7 +122,7 @@ int	check_error(t_parsing *global)
 	|| !ft_strcmp(&global->parse.we[ft_strlen(global->parse.we) - 4], ".xpm")
 	|| !ft_strcmp(&global->parse.s[ft_strlen(global->parse.s) - 4], ".xpm"))
 	{
-		fprintf(stderr, "Error: Texture extension in not in .xpm\n");
+		fprintf(stderr, "Error:-NO/SO/WE/AE/S: Texture extension in not in .xpm\n");
 		nb_error++;
 	}
 	return (check_error_next(nb_error, global));

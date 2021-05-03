@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 03:29:55 by jessy             #+#    #+#             */
-/*   Updated: 2021/05/03 16:55:06 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/03 17:28:33 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,11 @@ int		my_mlx_loop2(t_global *global)
 {
 	print_sprite(global, &global->parsing);
 	free_sprite(global);
+	if (global->parsing.value.save)
+	{
+		fill_bmp(global);
+		close_mlx(global);
+	}
 	mlx_put_image_to_window(global->mlx.mlx,
 			global->mlx.win, global->mlx.img, 0, 0);
 	check_move(global, &global->parsing);

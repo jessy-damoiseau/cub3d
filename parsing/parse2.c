@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 15:49:55 by user42            #+#    #+#             */
-/*   Updated: 2021/04/28 15:53:46 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/03 17:42:01 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	check_file_next(int i, char **arg)
 	fd = open(arg[i], O_RDONLY);
 	if (read(fd, 0, 0) == -1)
 	{
-		fprintf(stderr, "ce ficher n'exite pas\n");
+		fprintf(stderr, "this file doesn't exist\n");
 		close(fd);
 		return (0);
 	}
@@ -96,7 +96,7 @@ int	check_file_next(int i, char **arg)
 	return (i);
 }
 
-int	check_file(int ac, char **arg)
+int	check_file(int ac, char **arg, t_parsing *global)
 {
 	int i;
 
@@ -105,9 +105,10 @@ int	check_file(int ac, char **arg)
 	{
 		if (!ft_strcmp(arg[1], "--save"))
 		{
-			fprintf(stderr, "Error: mauvais argument\n");
+			fprintf(stderr, "Error: bad argument\n");
 			return (0);
 		}
+		global->value.save = 1;
 		i = 2;
 	}
 	if (ac > 3 || ac < 2)

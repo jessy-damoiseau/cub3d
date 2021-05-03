@@ -6,7 +6,7 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/15 00:53:32 by jessy             #+#    #+#              #
-#    Updated: 2021/05/03 16:57:09 by user42           ###   ########.fr        #
+#    Updated: 2021/05/03 17:30:12 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRCS = 	parsing/check_error.c\
 		srcs/mlx_move.c\
 		srcs/mlx_print.c\
 		srcs/print_col.c\
+		srcs/fill_bmp.c\
 		\
 		main.c\
 

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 15:41:32 by jdamoise          #+#    #+#             */
-/*   Updated: 2021/04/28 15:53:10 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/03 17:19:50 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int	parse(int ac, t_parsing *global, char **arg)
 	int		i;
 
 	init_parsing(global);
-	if (!(i = check_file(ac, arg)))
+	if (!(i = check_file(ac, arg, global)))
 		return (1);
 	fd = open(arg[i], O_RDONLY);
 	line = 0;

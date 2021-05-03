@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 04:06:15 by user42            #+#    #+#             */
-/*   Updated: 2021/05/03 17:01:46 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/03 17:39:14 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	calcul_sprite(t_global *global, t_parsing *parsing, int i)
 		global->constante.planex * global->csprite.spritey);
 	global->csprite.spritescreenx = (int)((parsing->value.rx / 2) *
 			(1 + global->csprite.transformx / global->csprite.transformy));
-	global->csprite.vmovescreen = (int)(vMove / global->csprite.transformy);
+	global->csprite.vmovescreen = (int)(VMOVE / global->csprite.transformy);
 	global->csprite.spriteheight = abs((int)(parsing->value.ry /
-				(global->csprite.transformy))) / vDiv;
+				(global->csprite.transformy))) / VDIV;
 }
 
 void	calcul_lensprite(t_global *global, t_parsing *parsing)
@@ -61,7 +61,7 @@ void	calcul_lensprite(t_global *global, t_parsing *parsing)
 	if (global->csprite.drawendy >= parsing->value.ry)
 		global->csprite.drawendy = parsing->value.ry - 1;
 	global->csprite.spritewidth = abs((int)(parsing->value.ry
-				/ (global->csprite.transformy))) / uDiv;
+				/ (global->csprite.transformy))) / UDIV;
 	global->csprite.drawstartx = -global->csprite.spritewidth
 		/ 2 + global->csprite.spritescreenx;
 	if (global->csprite.drawstartx < 0)

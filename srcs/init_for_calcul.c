@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 04:51:37 by user42            #+#    #+#             */
-/*   Updated: 2021/05/02 04:53:15 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/03 17:22:08 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	init_strut_next(t_global *global)
 	global->textures.texx = 0;
 	global->textures.texy = 0;
 	global->textures.wallx = 0;
+	global->parsing.value.save = 0;
 }
 
 void	init_struct(t_global *global)
