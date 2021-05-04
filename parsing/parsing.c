@@ -9,9 +9,12 @@ int check_if_map(char *line)
 
     i = 0;
     while (line[i])
+    {
         if (line[i] != '1' && line[i] != '2'
         && line[i] != '0' && line[i] != ' ')
             return (0);
+        i++;
+    }
     return (1);
 }
 
@@ -49,8 +52,6 @@ int fill_and_checkerror(t_global *global, t_psing *psing)
     while (psing->parse.nb_pfill != 8 && psing->file)
     {
         i = 0;
-
-
         if (*psing->file->line && psing->file->line[0] == 'R' && psing->file->line[1] == ' ' && !psing->parse.r)
         {
                 i++;
@@ -123,8 +124,9 @@ int fill_and_checkerror(t_global *global, t_psing *psing)
         else if (*psing->file->line && psing->file->line[0] == 'S' && psing->file->line[1] == ' ' && psing->parse.s)
             return (fprintf(stderr, "Error\nparametre S en double\n"));
 
-        if (!i && *psing->file->line && psing->parse.nb_pfill < 8)
+        if (!i && psing->file->line[0] && psing->parse.nb_pfill < 8)
         {
+
             if (check_if_map(psing->file->line))
                 return (fprintf(stderr, "Error\n il manque %d paramtre(s)\n", 8 - psing->parse.nb_pfill));
             return (fprintf(stderr, "Error\n mauvais parametre\n"));
@@ -134,11 +136,13 @@ int fill_and_checkerror(t_global *global, t_psing *psing)
         psing->file = psing->file->next;
         free(tmp);
     }
+
     while (psing->file && !psing->file->line[0])
     {
         tmp = psing->file;
         psing->file = psing->file->next;
     }
+
     if (!psing->file)
         return (fprintf(stderr, "Error\n pas de map"));
     fill_map(psing);
