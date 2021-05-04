@@ -25,7 +25,8 @@ int check_error_r(char *line, int *c, t_global *global)
     }
     if (nb_args != 2)
         return (fprintf(stderr, "Error\n-R pas le bon nombre de parametre\n"));
-    fill_xy(str, &global->psing, c);
+    if (fill_xy(str, &global->psing, c))
+        return (1);
     return (0);
 }
 
@@ -47,6 +48,8 @@ int check_error_fc(char *line, int *param, t_global *global, int c)
     if (str[0] == ',' || str[len(str) - 1] == ',')
         return (fprintf(stderr, "Error\n-%c virgule au debout ou a la fin du parametre\n", c));
     nb_coma = nb_virgule(str);
+    if (check_virgule(str))
+        return (1);
     if (nb_coma != 3)
     {
         if (nb_coma < 3)
@@ -57,7 +60,6 @@ int check_error_fc(char *line, int *param, t_global *global, int c)
     fill_fc(str, &global->psing, param, c);
     return (0);
 }
-
 int check_error_texture(char *line, t_global *global, int c)
 {
     int i;
@@ -116,7 +118,7 @@ int check_char_map(t_global *global)
             if (global->psing.parse.map[i][j] != ' ' && global->psing.parse.map[i][j] != '0' &&
             global->psing.parse.map[i][j] != '1' && global->psing.parse.map[i][j] != '2' && global->psing.parse.map[i][j] != 'N' &&
             global->psing.parse.map[i][j] != 'W' && global->psing.parse.map[i][j] != 'S' && global->psing.parse.map[i][j] != 'E')
-                return (fprintf(stderr, "Error\n ligne %d, charatere %d, un %c se balade", i, j, global->psing.parse.map[i][j]));
+                return (fprintf(stderr, "Error\n ligne %d, charatere %d, un %c se balade\n", i, j, global->psing.parse.map[i][j]));
             j++;
         }
         i++;

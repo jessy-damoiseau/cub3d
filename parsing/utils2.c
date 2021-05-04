@@ -120,3 +120,14 @@ int	find(int c)
 			return (1);
 	return (0);
 }
+
+int check_virgule(char *str)
+{
+	int i;
+
+	i = -1;
+	while (str[++i])
+		if (str[i] == ',' && str[i + 1] == ',')
+			return (fprintf(stderr, "Error\n deux virgule concecutive\n"));
+	return (0);
+}

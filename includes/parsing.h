@@ -57,7 +57,7 @@ char	    *get_line_return(char *str);
 int		    gnl(int fd, char **line);
 int	    check_hole(char **map);
 int     propagation(int x, int y, char **map, int stop);
-void    fill_xy(char *str, t_psing *psing, int *c);
+int     fill_xy(char *str, t_psing *psing, int *c);
 void    fill_f(char *str,t_psing *psing);
 void    fill_c(char *str,t_psing *psing);
 void    fill_fc(char *str, t_psing *psing, int *param, int c);
@@ -78,6 +78,8 @@ void			trim(char **dest, char *s, char *set);
 char	**str_ds_dup(char **str);
 void	free_ds(char **map);
 int	find(int c);
+int check_if_map(char *line);
+int check_virgule(char *str);
 
 
 #endif

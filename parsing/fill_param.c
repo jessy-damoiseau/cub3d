@@ -1,20 +1,25 @@
 #include "../includes/cub3d.h"
 
 
-void    fill_xy(char *str, t_psing *psing, int *c)
+int    fill_xy(char *str, t_psing *psing, int *c)
 {
     int i;
 
     i = 0;
     while (str[i] && str[i] != ' ')
         psing->value.rx = psing->value.rx * 10 + str[i++] - '0';
+    if (psing->value.rx == 0)
+        return (fprintf(stderr, "Error\n resolution x non valide\n"));
     while (str[i] && str[i] == ' ')
         i++;
     while (str[i])
         psing->value.ry = psing->value.ry * 10 + str[i++] - '0';
+    if (psing->value.ry == 0)
+        return (fprintf(stderr, "Error\n resolution y non valide\n"));
     psing->parse.nb_pfill++;
     (*c)++;
     free(str);
+    return (0);
 }
 
 void    fill_f(char *str,t_psing *psing)
@@ -30,13 +35,14 @@ void    fill_f(char *str,t_psing *psing)
             psing->value.floor[j] = psing->value.floor[j] * 10 + str[i++] - '0';
         else
         {
-            if (psing->value.floor[j++] > 255)
-                psing->value.floor[j - 1] = 255;
+            j++;
             i++;
         }
     }
-    if (psing->value.floor[j] > 255)
-        psing->value.floor[j] = 255;
+    j = 0;
+    while (j < 3)
+        if (psing->value.floor[j++] > 255)
+            psing->value.floor[j - 1] = 255;
 }
 
 void    fill_c(char *str,t_psing *psing)
@@ -52,13 +58,14 @@ void    fill_c(char *str,t_psing *psing)
             psing->value.sky[j] = psing->value.sky[j] * 10 + str[i++] - '0';
         else
         {
-            if (psing->value.sky[j++] > 255)
-                psing->value.sky[j - 1] = 255;
+            j++;
             i++;
         }
     }
-    if (psing->value.sky[j] > 255)
-        psing->value.sky[j] = 255;
+    j = 0;
+    while (j < 3)
+        if (psing->value.sky[j++] > 255)
+            psing->value.sky[j - 1] = 255;
 }
 
 void    fill_fc(char *str, t_psing *psing, int *param, int c)
@@ -98,6 +105,8 @@ int fill_map(t_psing *psing)
 
     i = 0;
     nb_map = lst_size(psing->file, psing);
+    if (!nb_map)
+        return (fprintf(stderr, "Error\n la map n'existe pas\n"));
     if (!(psing->parse.map = malloc(sizeof(char *) * (nb_map + 1))))
         return (fprintf(stderr, "Error\n malloc fail\n"));
     while(psing->file)
@@ -119,5 +128,6 @@ int fill_map(t_psing *psing)
         i++;
     }  
     psing->parse.map[i] = 0;
+
     return (0);
 }

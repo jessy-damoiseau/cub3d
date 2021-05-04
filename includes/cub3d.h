@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:31:21 by user42            #+#    #+#             */
-/*   Updated: 2021/05/04 18:56:53 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/04 20:00:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,8 @@ typedef struct	s_global
 }				t_global;
 
 void			value_windows_size(t_global *global);
-void			init_textures(t_global *global);
-void			init_mlx(t_global *global);
+int				init_textures(t_global *global);
+int				init_mlx(t_global *global);
 void			init_strut_next(t_global *global);
 void			init_struct(t_global *global);
 void			init_constante(t_global *global);

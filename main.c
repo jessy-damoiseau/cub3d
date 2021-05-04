@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 04:48:02 by user42            #+#    #+#             */
-/*   Updated: 2021/05/04 19:05:01 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/04 20:07:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ int		main(int ac, char **av)
 	}
 	init_constante(&global);
 	global.mlx.mlx = mlx_init();
-	init_mlx(&global);
+	if (init_mlx(&global))
+		return (1);
 	global.mlx.win = mlx_new_window(global.mlx.mlx,
 		global.psing.value.rx, global.psing.value.ry, "cub3d");
 	check_sprite(&global);

@@ -1,33 +1,33 @@
 #include "../includes/gnl.h"
 #include "../includes/cub3d.h"
 
-int check_file2(char *arg)
-{
-    int fd;
-   // char str[33];
 
-    if ((fd = open(arg, O_RDONLY)) < 0)
-    {
-        close(fd);
-        return (fprintf(stderr, "Error\n open fouare\n"));
-    }
-    //--------//
-    //--------//
-    //--------//
-    close(fd);
-    return (0);
+
+int check_if_map(char *line)
+{
+    int i;
+
+    i = 0;
+    while (line[i])
+        if (line[i] != '1' && line[i] != '2'
+        && line[i] != '0' && line[i] != ' ')
+            return (0);
+    return (1);
 }
 
 int check_file(int ac, char **av, int *i)
 {
+    int j;
+
+    j = 1;
     if (ac == 3)
     {
         if (cmp(av[1], "--save"))
             return (fprintf(stderr, "Error\n movais paramettre\n"));
         else
-            *i = 2;
+            j = 2;
     }
-    if (ac < 2 && ac > 3)
+    if (ac < 2 || ac > 3)
     {
         if (ac < 2)
             fprintf(stderr, "Error\n pas assez d'args\n");
@@ -35,9 +35,10 @@ int check_file(int ac, char **av, int *i)
             fprintf(stderr, "Error\n trop d'args\n");
         return (1);
     }
-    if (cmp(&av[*i][len(av[*i] - 4)], ".cub"))
+    if (cmp(&av[j][len(av[j]) - 4], ".cub"))
         return (fprintf(stderr, "Error\n fichier sans extention .cub\n"));
-    return (check_file2(av[(*i)]));
+    *i = j;
+    return (0);
 }
 
 int fill_and_checkerror(t_global *global, t_psing *psing)
@@ -45,92 +46,101 @@ int fill_and_checkerror(t_global *global, t_psing *psing)
     t_file *tmp;
     int i;
 
-    while (psing->parse.nb_pfill != 8)
+    while (psing->parse.nb_pfill != 8 && psing->file)
     {
         i = 0;
-        if (psing->file->line[0] == 'R' && psing->file->line[1] == ' ' && !psing->parse.r)
+
+
+        if (*psing->file->line && psing->file->line[0] == 'R' && psing->file->line[1] == ' ' && !psing->parse.r)
         {
                 i++;
                 if (check_error_r(psing->file->line, &psing->parse.r, global))
                     return (1);
         }
-        else if (psing->file->line[0] == 'R' && psing->file->line[1] == ' ' && psing->parse.r)
+        else if (*psing->file->line && psing->file->line[0] == 'R' && psing->file->line[1] == ' ' && psing->parse.r)
             return (fprintf(stderr, "Error\nparametre R en double\n"));
 
-        if (psing->file->line[0] == 'F' && psing->file->line[1] == ' ' && !psing->parse.f)
+        if (*psing->file->line && psing->file->line[0] == 'F' && psing->file->line[1] == ' ' && !psing->parse.f)
         {
             i++;
             if (check_error_fc(psing->file->line, &psing->parse.f, global, 'F'))
                 return (1);
         }
-        else if (psing->file->line[0] == 'F' && psing->file->line[1] == ' ' && psing->parse.f)
+        else if (*psing->file->line && psing->file->line[0] == 'F' && psing->file->line[1] == ' ' && psing->parse.f)
             return (fprintf(stderr, "Error\nparametre F en double\n"));
 
-        if (psing->file->line[0] == 'C' && psing->file->line[1] == ' ' && !psing->parse.c)
+        if (*psing->file->line && psing->file->line[0] == 'C' && psing->file->line[1] == ' ' && !psing->parse.c)
         {
             i++;
             if (check_error_fc(psing->file->line, &psing->parse.c, global, 'C'))
                 return (1);
         }
-        else if (psing->file->line[0] == 'C' && psing->file->line[1] == ' ' && psing->parse.c)
+        else if (*psing->file->line && psing->file->line[0] == 'C' && psing->file->line[1] == ' ' && psing->parse.c)
             return (fprintf(stderr, "Error\nparametre C en double\n"));
 
-        if (psing->file->line[0] == 'N' && psing->file->line[1] == 'O' && psing->file->line[2] == ' ' && !psing->parse.no)
+        if (*psing->file->line && psing->file->line[0] == 'N' && psing->file->line[1] == 'O' && psing->file->line[2] == ' ' && !psing->parse.no)
         {
             i++;
             if (check_error_texture(psing->file->line, global, 'N'))
                 return (1);
         }
-        else if (psing->file->line[0] == 'N' && psing->file->line[1] == 'O' && psing->file->line[2] == ' ' && psing->parse.no)
+        else if (*psing->file->line && psing->file->line[0] == 'N' && psing->file->line[1] == 'O' && psing->file->line[2] == ' ' && psing->parse.no)
             return (fprintf(stderr, "Error\nparametre NO en double\n"));
 
-        if (psing->file->line[0] == 'S' && psing->file->line[1] == 'O' && psing->file->line[2] == ' ' && !psing->parse.so)
+        if (*psing->file->line && psing->file->line[0] == 'S' && psing->file->line[1] == 'O' && psing->file->line[2] == ' ' && !psing->parse.so)
         {
             i++;
             if (check_error_texture(psing->file->line, global, 'S'))
                 return (1);
         }
-        else if (psing->file->line[0] == 'S' && psing->file->line[1] == 'O' && psing->file->line[2] == ' ' && psing->parse.so)
+        else if (*psing->file->line && psing->file->line[0] == 'S' && psing->file->line[1] == 'O' && psing->file->line[2] == ' ' && psing->parse.so)
             return (fprintf(stderr, "Error\nparametre SO en double\n"));
 
-        if (psing->file->line[0] == 'W' && psing->file->line[1] == 'E' && psing->file->line[2] == ' ' && !psing->parse.we)
+        if (*psing->file->line && psing->file->line[0] == 'W' && psing->file->line[1] == 'E' && psing->file->line[2] == ' ' && !psing->parse.we)
         {
             i++;
             if (check_error_texture(psing->file->line, global, 'W'))
                 return (1);
         }
-        else if (psing->file->line[0] == 'W' && psing->file->line[1] == 'E' && psing->file->line[2] == ' ' && psing->parse.we)
+        else if (*psing->file->line && psing->file->line[0] == 'W' && psing->file->line[1] == 'E' && psing->file->line[2] == ' ' && psing->parse.we)
             return (fprintf(stderr, "Error\nparametre WE en double\n"));
 
-        if (psing->file->line[0] == 'E' && psing->file->line[1] == 'A' && psing->file->line[2] == ' ' && !psing->parse.ea)
+        if (*psing->file->line && psing->file->line[0] == 'E' && psing->file->line[1] == 'A' && psing->file->line[2] == ' ' && !psing->parse.ea)
         {
             i++;
             if (check_error_texture(psing->file->line, global, 'E'))
                 return (1);
         }
-        else if (psing->file->line[0] == 'E' && psing->file->line[1] == 'A' && psing->file->line[2] == ' ' && psing->parse.ea)
+        else if (*psing->file->line && psing->file->line[0] == 'E' && psing->file->line[1] == 'A' && psing->file->line[2] == ' ' && psing->parse.ea)
             return (fprintf(stderr, "Error\nparametr EA en double\n"));
 
-        if (psing->file->line[0] == 'S' && psing->file->line[1] == ' ' && !psing->parse.s)
+        if (*psing->file->line && psing->file->line[0] == 'S' && psing->file->line[1] == ' ' && !psing->parse.s)
         {
             i++;
             if (check_error_sprite(psing->file->line, global))
                 return (1);
         }
-        else if (psing->file->line[0] == 'S' && psing->file->line[1] == ' ' && psing->parse.s)
+        else if (*psing->file->line && psing->file->line[0] == 'S' && psing->file->line[1] == ' ' && psing->parse.s)
             return (fprintf(stderr, "Error\nparametre S en double\n"));
 
-        if (!i && psing->file->line && psing->parse.nb_pfill < 8)
+        if (!i && *psing->file->line && psing->parse.nb_pfill < 8)
+        {
+            if (check_if_map(psing->file->line))
+                return (fprintf(stderr, "Error\n il manque %d paramtre(s)\n", 8 - psing->parse.nb_pfill));
             return (fprintf(stderr, "Error\n mauvais parametre\n"));
+        }
+
         tmp = psing->file;
         psing->file = psing->file->next;
         free(tmp);
     }
-    while (!psing->file->line[0])
+    while (psing->file && !psing->file->line[0])
     {
         tmp = psing->file;
         psing->file = psing->file->next;
     }
+    if (!psing->file)
+        return (fprintf(stderr, "Error\n pas de map"));
     fill_map(psing);
     if (check_error_map(global))
         return (1);
@@ -146,14 +156,16 @@ int parse(int ac, char **av, t_global *global, t_psing *psing)
     line = 0;
     psing->file = 0;
     i = 1;
-    (void)ac;
     init_parse(global);
-    //if (check_file(ac , av, &i))
-    //    return (1);
+    if (check_file(ac , av, &i))
+        return (1);
     fd = open(av[i], O_RDONLY);
+    if (fd == -1)
+        return (fprintf(stderr, "Error\n open fouare\n"));
     while (gnl(fd, &line) == 1)
         lstadd_back(&psing->file, lstnew(line));
     lstadd_back(&psing->file, lstnew(line));
+
     if (lst_size(psing->file, psing) < 1)
         return (fprintf(stderr, "Error\nfichier vide\n"));
     if (fill_and_checkerror(global, psing))

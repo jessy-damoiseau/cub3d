@@ -1,6 +1,6 @@
 R 1280 720
-C 173,216,230
-F 125,125,125
+C 173,216,60000
+F 125,32,125
 WE ./textures/mossy.xpm
 NO ./textures/wood.xpm
 S ./textures/tonneau.xpm
