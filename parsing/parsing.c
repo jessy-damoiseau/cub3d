@@ -144,7 +144,7 @@ int fill_and_checkerror(t_global *global, t_psing *psing)
     }
 
     if (!psing->file)
-        return (fprintf(stderr, "Error\n pas de map"));
+        return (fprintf(stderr, "Error\n pas de map\n"));
     fill_map(psing);
     if (check_error_map(global))
         return (1);
