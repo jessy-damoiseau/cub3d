@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:31:21 by user42            #+#    #+#             */
-/*   Updated: 2021/05/03 20:39:23 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/04 18:56:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,13 +131,14 @@ typedef struct	s_pair
 	int		second;
 }				t_pair;
 
+
 typedef struct	s_global
 {
 	t_calcul	calcul;
 	t_mlx		mlx;
 	t_nb_wpixel pixel;
 	t_const		constante;
-	t_parsing	parsing;
+	t_psing		psing;
 	t_textures	textures;
 	t_xpm		xpm[5];
 	t_sprite	*sprite;
@@ -152,21 +153,21 @@ void			init_struct(t_global *global);
 void			init_constante(t_global *global);
 void			get_dir2(t_global *global, char c);
 void			get_dir(t_global *global);
-void			check_hit(t_global *global, t_parsing *parsing);
-void			calcul_perpandlentext(t_global *global, t_parsing *parsing);
-void			calculfortex(t_global *global, t_parsing *parsing);
+void			check_hit(t_global *global, t_psing *psing);
+void			calcul_perpandlentext(t_global *global, t_psing *psing);
+void			calculfortex(t_global *global, t_psing *psing);
 int				my_mlx_loop2(t_global *global);
 int				my_mlx_loop(t_global *global);
 void			check_move4(t_global *global);
 void			check_move3(t_global *global);
-void			check_move2(t_global *global, t_parsing *parsing);
-void			check_move(t_global *global, t_parsing *parsing);
+void			check_move2(t_global *global, t_psing *psing);
+void			check_move(t_global *global, t_psing *psing);
 void			take_raystepsidedist(t_global *global);
 void			first_part_sprite(t_global *global);
-void			calcul_sprite(t_global *global, t_parsing *parsing, int i);
-void			calcul_lensprite(t_global *global, t_parsing *parsing);
-void			fill_addr(t_global *global, t_parsing *parsing);
-void			print_sprite(t_global *global, t_parsing *parsing);
+void			calcul_sprite(t_global *global, t_psing *psing, int i);
+void			calcul_lensprite(t_global *global, t_psing *psing);
+void			fill_addr(t_global *global, t_psing *psing);
+void			print_sprite(t_global *global, t_psing *psing);
 int				close_mlx(t_global *global);
 int				get_color(int r, int g, int b);
 int				keypress(int keycode, t_mlx *mlx);
@@ -176,13 +177,25 @@ void			init_calcul(t_global *global, int x);
 void			get_texnum(t_global *global);
 void			sort_order(t_pair *orders, int amount);
 void			sortsprites(t_global *global);
-int				malloc_sprite(t_global *global, t_parsing *parsing);
-void			print_col(t_global *global, t_parsing *parsing, int x);
+int				malloc_sprite(t_global *global, t_psing *psing);
+void			print_col(t_global *global, t_psing *psing, int x);
 int				get_spawn(char **map, int i);
 void			check_sprite2(t_global *global);
 void			check_sprite(t_global *global);
 void			fill_bmp(t_global *global);
-char 			**fill_space_map(t_parsing *global);
+char 			**fill_space_map(t_psing *gbal);
 char			*fill_space(char *str, int len);
+int check_error_r(char *line, int *c, t_global *global);
+int check_error_fc(char *line, int *param, t_global *global, int c);
+int check_error_texture(char *line, t_global *global, int c);
+int check_error_sprite(char *line, t_global *global);
+int check_char_map(t_global *global);
+int check_error_map(t_global *global);
+int check_spawn(t_global *global);
+void    init_struct(t_global *global);
+int fill_and_checkerror(t_global *global, t_psing *psing);
+int parse(int ac, char **av, t_global *global, t_psing *psing);
+void    init_parse(t_global *global);
+int fill_map(t_psing *psing);
 
 #endif

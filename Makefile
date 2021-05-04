@@ -6,25 +6,19 @@
 #    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/15 00:53:32 by jessy             #+#    #+#              #
-#    Updated: 2021/05/03 21:17:44 by user42           ###   ########.fr        #
+#    Updated: 2021/05/04 16:10:11 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
-SRCS = 	parsing/check_error.c\
-		parsing/check_map.c\
-		parsing/ft_strtrim.c\
-		parsing/list.c\
-		parsing/parse.c\
-		parsing/parse2.c\
-		parsing/parse3.c\
-		parsing/parsing_rfc.c\
-		parsing/gnl/get_next_line_utils.c\
-		parsing/gnl/get_next_line.c\
-		parsing/utils/utils.c\
-		parsing/utils/utils2.c\
-		parsing/init.c\
+SRCS = 	parsing/gnl/gnl.c\
+		parsing/gnl/gnl_utils.c\
+		parsing/check_error.c\
+		parsing/fill_param.c\
+		parsing/parsing.c\
+		parsing/utils.c\
+		parsing/utils2.c\
 		\
 		srcs/mlx_loop.c\
 		srcs/mlx_utils.c\

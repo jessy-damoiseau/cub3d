@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 04:51:37 by user42            #+#    #+#             */
-/*   Updated: 2021/05/03 17:22:08 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/04 19:03:44 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ void	init_textures(t_global *global)
 	int trash;
 
 	global->xpm[0].img = mlx_xpm_file_to_image(global->mlx.mlx,
-			global->parsing.parse.no, &global->xpm[0].w, &global->xpm[0].h);
+			global->psing.parse.no, &global->xpm[0].w, &global->xpm[0].h);
 	global->xpm[1].img = mlx_xpm_file_to_image(global->mlx.mlx,
-			global->parsing.parse.so, &global->xpm[1].w, &global->xpm[1].h);
+			global->psing.parse.so, &global->xpm[1].w, &global->xpm[1].h);
 	global->xpm[2].img = mlx_xpm_file_to_image(global->mlx.mlx,
-			global->parsing.parse.we, &global->xpm[2].w, &global->xpm[2].h);
+			global->psing.parse.we, &global->xpm[2].w, &global->xpm[2].h);
 	global->xpm[3].img = mlx_xpm_file_to_image(global->mlx.mlx,
-			global->parsing.parse.ea, &global->xpm[3].w, &global->xpm[3].h);
+			global->psing.parse.ea, &global->xpm[3].w, &global->xpm[3].h);
 	global->xpm[4].img = mlx_xpm_file_to_image(global->mlx.mlx,
-			global->parsing.parse.s, &global->xpm[4].w, &global->xpm[4].h);
+			global->psing.parse.s, &global->xpm[4].w, &global->xpm[4].h);
 	global->xpm[0].addr = (int*)mlx_get_data_addr(global->xpm[0].img,
 			&trash, &trash, &trash);
 	global->xpm[1].addr = (int*)mlx_get_data_addr(global->xpm[1].img,
@@ -36,6 +36,18 @@ void	init_textures(t_global *global)
 			&trash, &trash, &trash);
 	global->xpm[4].addr = (int*)mlx_get_data_addr(global->xpm[4].img,
 			&trash, &trash, &trash);
+}
+
+void	value_windows_size(t_global *global)
+{
+	int	wx;
+	int	wy;
+
+	mlx_get_screen_size(global->mlx.mlx, &wx, &wy);
+	if (global->psing.value.rx > wx)
+		global->psing.value.rx = wx;
+	if (global->psing.value.ry > wy)
+		global->psing.value.ry = wy;
 }
 
 void	init_mlx(t_global *global)
@@ -56,7 +68,7 @@ void	init_strut_next(t_global *global)
 	global->textures.texx = 0;
 	global->textures.texy = 0;
 	global->textures.wallx = 0;
-	global->parsing.value.save = 0;
+	global->psing.value.save = 0;
 }
 
 void	init_struct(t_global *global)
@@ -90,9 +102,9 @@ void	init_struct(t_global *global)
 
 void	init_constante(t_global *global)
 {
-	global->constante.posx = get_spawn(global->parsing.parse.map, 0) + 0.5;
-	global->constante.posy = get_spawn(global->parsing.parse.map, 1) + 0.5;
+	global->constante.posx = get_spawn(global->psing.parse.map, 0) + 0.5;
+	global->constante.posy = get_spawn(global->psing.parse.map, 1) + 0.5;
 	get_dir(global);
-	global->parsing.parse.map[(int)global->constante.posx]
+	global->psing.parse.map[(int)global->constante.posx]
 		[(int)global->constante.posy] = '0';
 }

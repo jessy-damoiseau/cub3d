@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 04:48:02 by user42            #+#    #+#             */
-/*   Updated: 2021/05/03 19:14:02 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/04 19:05:01 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int		get_spawn(char **map, int i)
 	return (x);
 }
 
+
 void	check_sprite2(t_global *global)
 {
 	int i;
@@ -49,11 +50,11 @@ void	check_sprite2(t_global *global)
 	while (k < global->constante.nsprites)
 	{
 		i = -1;
-		while (global->parsing.parse.map[++i])
+		while (global->psing.parse.map[++i])
 		{
 			j = -1;
-			while (global->parsing.parse.map[i][++j])
-				if (global->parsing.parse.map[i][j] == '2')
+			while (global->psing.parse.map[i][++j])
+				if (global->psing.parse.map[i][j] == '2')
 				{
 					global->sprite[k].x = i + 0.5;
 					global->sprite[k++].y = j + 0.5;
@@ -68,11 +69,11 @@ void	check_sprite(t_global *global)
 	int j;
 
 	i = -1;
-	while (global->parsing.parse.map[++i])
+	while (global->psing.parse.map[++i])
 	{
 		j = -1;
-		while (global->parsing.parse.map[i][++j])
-			if (global->parsing.parse.map[i][j] == '2')
+		while (global->psing.parse.map[i][++j])
+			if (global->psing.parse.map[i][j] == '2')
 				global->constante.nsprites++;
 	}
 	if (!(global->sprite = malloc(sizeof(t_sprite)
@@ -86,19 +87,22 @@ int		main(int ac, char **av)
 	t_global	global;
 
 	init_struct(&global);
-	if (parse(ac, &global.parsing, av))
+	if (parse(ac, av, &global, &global.psing))
+	{
+		clear_parse(&global.psing.parse);
 		return (1);
+	}
 	init_constante(&global);
 	global.mlx.mlx = mlx_init();
 	init_mlx(&global);
 	global.mlx.win = mlx_new_window(global.mlx.mlx,
-		global.parsing.value.rx, global.parsing.value.ry, "cub3d");
+		global.psing.value.rx, global.psing.value.ry, "cub3d");
 	check_sprite(&global);
 	mlx_hook(global.mlx.win, 2, 1L << 0, keypress, &global.mlx);
 	mlx_hook(global.mlx.win, 3, 1L << 1, keyrelease, &global.mlx);
 	mlx_hook(global.mlx.win, 33, 1L << 17, close_mlx, &global.mlx);
-	global.mlx.img = mlx_new_image(global.mlx.mlx, global.parsing.value.rx,
-			global.parsing.value.ry);
+	global.mlx.img = mlx_new_image(global.mlx.mlx, global.psing.value.rx,
+			global.psing.value.ry);
 	global.mlx.addr = (int*)mlx_get_data_addr(global.mlx.img, &global.mlx.bpp,
 			&global.mlx.len_line, &global.mlx.endian);
 	mlx_loop_hook(global.mlx.mlx, my_mlx_loop, (void*)&global);

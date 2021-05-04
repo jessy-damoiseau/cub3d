@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:29:04 by user42            #+#    #+#             */
-/*   Updated: 2021/05/03 19:13:50 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/04 15:50:22 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void    fill_file_header(t_global *global, int fd)
     int pixel_data;
     
     pixel_data = 54;
-    size = pixel_data + global->parsing.value.rx * global->parsing.value.ry * 4;
+    size = pixel_data + global->psing.value.rx * global->psing.value.ry * 4;
     write(fd, "BM", 2);
     write(fd, &size, 4);
     write(fd, "\0\0\0\0", 4);
@@ -33,10 +33,10 @@ void	image_header(t_global *global, int fd)
 
 	header_size = 40;
 	plane = 1;
-	image_size = global->parsing.value.rx * global->parsing.value.ry;
+	image_size = global->psing.value.rx * global->psing.value.ry;
 	write(fd, &header_size, 4);
-	write(fd, &global->parsing.value.rx, 4);
-	write(fd, &global->parsing.value.ry, 4);
+	write(fd, &global->psing.value.rx, 4);
+	write(fd, &global->psing.value.ry, 4);
 	write(fd, &plane, 2);
 	write(fd, &global->mlx.bpp, 2);
 	write(fd, "\0\0\0\0", 4);
@@ -52,10 +52,10 @@ void    fill_image(t_global *global, int fd)
     int k;
     
     y  = -1;
-    while (++y >= global->parsing.value.ry)
+    while (++y >= global->psing.value.ry)
     {
         x = -1;
-        while (++x < global->parsing.value.rx)
+        while (++x < global->psing.value.rx)
         {
             k = -1;
             while (++k < 3)

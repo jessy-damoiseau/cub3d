@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 04:10:34 by user42            #+#    #+#             */
-/*   Updated: 2021/05/03 17:08:40 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/04 15:52:52 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_calcul(t_global *global, int x)
 {
 	global->calcul.camerax = 2 * x /
-		(double)global->parsing.value.rx - 1;
+		(double)global->psing.value.rx - 1;
 	global->calcul.raydirx = global->constante.dirx +
 		global->constante.planex * global->calcul.camerax;
 	global->calcul.raydiry = global->constante.diry +
@@ -82,10 +82,10 @@ void	sortsprites(t_global *global)
 	}
 }
 
-int		malloc_sprite(t_global *global, t_parsing *parsing)
+int		malloc_sprite(t_global *global, t_psing *psing)
 {
 	if (!(global->csprite.zbuffer = malloc(sizeof(double)
-					* parsing->value.rx)))
+					* psing->value.rx)))
 		return (1);
 	if (!(global->csprite.spriteorder = malloc(sizeof(int)
 					* global->constante.nsprites)))

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jessy <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 17:38:36 by jessy             #+#    #+#             */
-/*   Updated: 2021/02/23 19:39:58 by jessy            ###   ########.fr       */
+/*   Updated: 2021/05/04 15:42:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../includes/gnl.h"
 
 char	*get_next_str(char *str)
 {
@@ -61,20 +61,20 @@ char	*get_line_return(char *str)
 	return (dest);
 }
 
-int		get_next_line(int fd, char **line)
+int		gnl(int fd, char **line)
 {
 	char			*buff;
 	static char		*str;
 	int				i;
 
 	i = 1;
-	if (fd < 0 || !line)
+	if (fd < 0 || !line || 33 <= 0)
 		return (-1);
-	if (!(buff = malloc(sizeof(char) * (33))))
+	if (!(buff = malloc(sizeof(char) * (33 + 1))))
 		return (-1);
 	while (!check_return(str) && i != 0)
 	{
-		if ((i = read(fd, buff, 32)) == -1)
+		if ((i = read(fd, buff, 33)) == -1)
 		{
 			free(buff);
 			return (-1);

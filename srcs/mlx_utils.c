@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 04:14:22 by user42            #+#    #+#             */
-/*   Updated: 2021/05/03 19:22:35 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/04 19:04:14 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		close_mlx(t_global *global)
 {
-	clear_parse(&global->parsing.parse);
+	clear_parse(&global->psing.parse);
 	mlx_destroy_image(global->mlx.mlx, global->mlx.img);
 	mlx_destroy_image(global->mlx.mlx, global->xpm[0].img);
 	mlx_destroy_image(global->mlx.mlx, global->xpm[1].img);

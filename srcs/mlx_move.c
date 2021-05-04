@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 04:09:34 by user42            #+#    #+#             */
-/*   Updated: 2021/05/03 16:52:55 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/04 15:51:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,26 +53,26 @@ void	check_move3(t_global *global)
 	check_move4(global);
 }
 
-void	check_move2(t_global *global, t_parsing *parsing)
+void	check_move2(t_global *global, t_psing *psing)
 {
 	if (global->mlx.tab[KEY_A])
 	{
-		if (parsing->parse.map[(int)(global->constante.posx)]
+		if (psing->parse.map[(int)(global->constante.posx)]
 		[(int)((global->constante.posy + global->constante.dirx
 		* MOVESPEED) + (0.1 * global->constante.dirx))] == '0')
 			global->constante.posy += global->constante.dirx * MOVESPEED;
-		if (parsing->parse.map[(int)((global->constante.posx -
+		if (psing->parse.map[(int)((global->constante.posx -
 		global->constante.diry * MOVESPEED) - (0.1 * global->constante.diry))]
 		[(int)global->constante.posy] == '0')
 			global->constante.posx -= global->constante.diry * MOVESPEED;
 	}
 	if (global->mlx.tab[KEY_D])
 	{
-		if (parsing->parse.map[(int)(global->constante.posx)]
+		if (psing->parse.map[(int)(global->constante.posx)]
 		[(int)((global->constante.posy - global->constante.dirx
 		* MOVESPEED) - (0.02 * global->constante.dirx))] == '0')
 			global->constante.posy -= global->constante.dirx * MOVESPEED;
-		if (parsing->parse.map[(int)((global->constante.posx +
+		if (psing->parse.map[(int)((global->constante.posx +
 		global->constante.diry * MOVESPEED) + (0.02 * global->constante.diry))]
 		[(int)global->constante.posy] == '0')
 			global->constante.posx += global->constante.diry * MOVESPEED;
@@ -80,31 +80,31 @@ void	check_move2(t_global *global, t_parsing *parsing)
 	check_move3(global);
 }
 
-void	check_move(t_global *global, t_parsing *parsing)
+void	check_move(t_global *global, t_psing *psing)
 {
 	if (global->mlx.tab[KEY_W])
 	{
-		if (parsing->parse.map[(int)((global->constante.posx +
+		if (psing->parse.map[(int)((global->constante.posx +
 		global->constante.dirx * MOVESPEED) + (0.01 * global->constante.dirx))]
 		[(int)(global->constante.posy)] == '0')
 			global->constante.posx += global->constante.dirx * MOVESPEED;
-		if (parsing->parse.map[(int)(global->constante.posx)]
+		if (psing->parse.map[(int)(global->constante.posx)]
 		[(int)((global->constante.posy + global->constante.diry
 		* MOVESPEED) + (0.01 * global->constante.diry))] == '0')
 			global->constante.posy += global->constante.diry * MOVESPEED;
 	}
 	if (global->mlx.tab[KEY_S])
 	{
-		if (parsing->parse.map[(int)((global->constante.posx -
+		if (psing->parse.map[(int)((global->constante.posx -
 		global->constante.dirx * MOVESPEED) + (0.01 * global->constante.dirx))]
 		[(int)(global->constante.posy)] == '0')
 			global->constante.posx -= global->constante.dirx * MOVESPEED;
-		if (parsing->parse.map[(int)(global->constante.posx)]
+		if (psing->parse.map[(int)(global->constante.posx)]
 		[(int)((global->constante.posy - global->constante.diry
 		* MOVESPEED) + (0.01 * global->constante.diry))] == '0')
 			global->constante.posy -= global->constante.diry * MOVESPEED;
 	}
-	check_move2(global, parsing);
+	check_move2(global, psing);
 }
 
 void	take_raystepsidedist(t_global *global)

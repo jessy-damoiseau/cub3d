@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 04:53:52 by user42            #+#    #+#             */
-/*   Updated: 2021/05/02 04:56:14 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/04 15:50:39 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	get_dir(t_global *global)
 {
 	char c;
 
-	c = global->parsing.parse.map[(int)global->constante.posx]
+	c = global->psing.parse.map[(int)global->constante.posx]
 		[(int)global->constante.posy];
 	if (c == 'N')
 	{
