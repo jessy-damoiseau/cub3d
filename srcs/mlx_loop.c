@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 03:29:55 by jessy             #+#    #+#             */
-/*   Updated: 2021/05/04 18:54:29 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/05 02:17:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,23 +105,14 @@ int		my_mlx_loop(t_global *global)
 		return (1);
 	while (++x < global->psing.value.rx)
 	{
-	//	fprintf(stderr, "check2\n");
 		init_calcul(global, x);
-		//fprintf(stderr, "check3\n");
 		take_raystepsidedist(global);
-		//fprintf(stderr, "check4\n");
 		check_hit(global, &global->psing);
-		//fprintf(stderr, "check5\n");
 		calcul_perpandlentext(global, &global->psing);
-		//fprintf(stderr, "check6\n");
 		get_texnum(global);
-		//fprintf(stderr, "check7\n");
 		calculfortex(global, &global->psing);
-		//fprintf(stderr, "check8\n");
 		print_col(global, &global->psing, x);
-		//fprintf(stderr, "check9\n");
 		global->csprite.zbuffer[x] = global->calcul.perpwalldist;
-		//fprintf(stderr, "check10\n");
 	}
 	return (my_mlx_loop2(global));
 }

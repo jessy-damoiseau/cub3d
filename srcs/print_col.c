@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 13:43:14 by user42            #+#    #+#             */
-/*   Updated: 2021/05/04 18:54:37 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/04 23:50:58 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,10 @@ void	print_col(t_global *global, t_psing *psing, int x)
 	int y;
 
 	y = 0;
-	//fprintf(stderr, "check11\n");
 	while (y < global->pixel.drawstart)
 		global->mlx.addr[y++
 		* psing->value.rx + x] = get_color(psing->value.sky[0],
 		psing->value.sky[1], psing->value.sky[2]);
-	//fprintf(stderr, "check12\n");
 	while (y <= global->pixel.drawend)
 	{
 		if (psing->parse.map[global->calcul.mapx][global->calcul.mapy] == '1')
@@ -36,7 +34,6 @@ void	print_col(t_global *global, t_psing *psing, int x)
 				+ global->textures.texx];
 		}
 	}
-	//fprintf(stderr, "check13\n");
 	while (y < psing->value.ry)
 		global->mlx.addr[y++ *
 		psing->value.rx + x] = get_color(psing->value.floor[0],

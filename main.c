@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 04:48:02 by user42            #+#    #+#             */
-/*   Updated: 2021/05/04 20:07:12 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/05 02:19:38 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int		get_spawn(char **map, int i)
 		return (y);
 	return (x);
 }
-
 
 void	check_sprite2(t_global *global)
 {
@@ -88,24 +87,23 @@ int		main(int ac, char **av)
 
 	init_struct(&global);
 	if (parse(ac, av, &global, &global.psing))
-	{
-		clear_parse(&global.psing.parse);
-		return (1);
-	}
+		return (clear_parse(&global.psing.parse));
 	init_constante(&global);
 	global.mlx.mlx = mlx_init();
 	if (init_mlx(&global))
 		return (1);
-	global.mlx.win = mlx_new_window(global.mlx.mlx,
-		global.psing.value.rx, global.psing.value.ry, "cub3d");
-	check_sprite(&global);
-	mlx_hook(global.mlx.win, 2, 1L << 0, keypress, &global.mlx);
-	mlx_hook(global.mlx.win, 3, 1L << 1, keyrelease, &global.mlx);
-	mlx_hook(global.mlx.win, 33, 1L << 17, close_mlx, &global.mlx);
 	global.mlx.img = mlx_new_image(global.mlx.mlx, global.psing.value.rx,
 			global.psing.value.ry);
 	global.mlx.addr = (int*)mlx_get_data_addr(global.mlx.img, &global.mlx.bpp,
 			&global.mlx.len_line, &global.mlx.endian);
-	mlx_loop_hook(global.mlx.mlx, my_mlx_loop, (void*)&global);
+	check_sprite(&global);
+	if (global.psing.value.save)
+		my_mlx_loop(&global);
+	global.mlx.win = mlx_new_window(global.mlx.mlx,
+		global.psing.value.rx, global.psing.value.ry, "cub3D");
+	mlx_hook(global.mlx.win, 2, 1L << 0, keypress, &global.mlx);
+	mlx_hook(global.mlx.win, 3, 1L << 1, keyrelease, &global.mlx);
+	mlx_hook(global.mlx.win, 33, 1L << 17, close_mlx, &global);
+	mlx_loop_hook(global.mlx.mlx, my_mlx_loop, &global);
 	mlx_loop(global.mlx.mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 04:14:22 by user42            #+#    #+#             */
-/*   Updated: 2021/05/04 19:04:14 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/05 02:12:48 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@ int		close_mlx(t_global *global)
 	mlx_destroy_image(global->mlx.mlx, global->xpm[2].img);
 	mlx_destroy_image(global->mlx.mlx, global->xpm[3].img);
 	mlx_destroy_image(global->mlx.mlx, global->xpm[4].img);
-	mlx_destroy_window(global->mlx.mlx, global->mlx.win);
+	if (!global->psing.value.save)
+		mlx_destroy_window(global->mlx.mlx, global->mlx.win);
 	mlx_destroy_display(global->mlx.mlx);
 	free(global->sprite);
 	free(global->mlx.mlx);
 	exit(0);
+	return (0);
 }
 
 int		get_color(int r, int g, int b)

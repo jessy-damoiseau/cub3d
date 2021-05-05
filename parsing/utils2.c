@@ -1,38 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/04 23:28:51 by user42            #+#    #+#             */
+/*   Updated: 2021/05/04 23:33:26 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
-
-int len(char *str)
-{
-    int i;
-
-    i = 0;
-    while (str[i])
-        i++;
-    return (i);
-}
-
-int nb_virgule(char *str)
-{
-    int i;
-    int nb_coma;
-
-    i = 0;
-    nb_coma = 1;
-    while (str[i])
-    {
-        if (str[i] == ',')
-        {
-            nb_coma++;
-            i++;
-        }
-        else
-            i++;
-    }
-    return (nb_coma);
-}
 
 int		trim_cmp(char s, char *set)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (set[i] && set[i] != s)
@@ -42,11 +24,11 @@ int		trim_cmp(char s, char *set)
 	return (0);
 }
 
-void			trim(char **dest, char *s, char *set)
+void	trim(char **dest, char *s, char *set)
 {
-	int	    i;
-	int	    j;
-	int	    k;
+	int	i;
+	int	j;
+	int	k;
 
 	j = 0;
 	k = 0;
@@ -64,7 +46,7 @@ void			trim(char **dest, char *s, char *set)
 	while (j < i)
 		(*dest)[j++] = s[k++];
 	(*dest)[j] = 0;
-    free(s);
+	free(s);
 }
 
 char	**str_ds_dup(char **str)
@@ -108,26 +90,15 @@ void	free_ds(char **map)
 	free(map);
 }
 
-int	find(int c)
+int		find(int c)
 {
-	char *str;
-	int i;
+	char	*str;
+	int		i;
 
 	i = 0;
 	str = "13";
 	while (str[i])
 		if (str[i++] == c)
 			return (1);
-	return (0);
-}
-
-int check_virgule(char *str)
-{
-	int i;
-
-	i = -1;
-	while (str[++i])
-		if (str[i] == ',' && str[i + 1] == ',')
-			return (fprintf(stderr, "Error\n deux virgule concecutive\n"));
 	return (0);
 }

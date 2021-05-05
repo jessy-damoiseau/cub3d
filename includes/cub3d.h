@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:31:21 by user42            #+#    #+#             */
-/*   Updated: 2021/05/04 20:00:41 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/05 02:12:40 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # define KEY_S 115
 # define KEY_A 97
 # define KEY_D 100
-# define KEY_RIGTHROT 39
-# define KEY_LEFTROT 59
+# define KEY_RIGTHROT 363
+# define KEY_LEFTROT 361
 
 typedef struct	s_calcul
 {
@@ -131,7 +131,6 @@ typedef struct	s_pair
 	int		second;
 }				t_pair;
 
-
 typedef struct	s_global
 {
 	t_calcul	calcul;
@@ -182,20 +181,28 @@ void			print_col(t_global *global, t_psing *psing, int x);
 int				get_spawn(char **map, int i);
 void			check_sprite2(t_global *global);
 void			check_sprite(t_global *global);
-void			fill_bmp(t_global *global);
-char 			**fill_space_map(t_psing *gbal);
+int				fill_bmp(t_global *global);
+char			**fill_space_map(t_psing *gbal);
 char			*fill_space(char *str, int len);
-int check_error_r(char *line, int *c, t_global *global);
-int check_error_fc(char *line, int *param, t_global *global, int c);
-int check_error_texture(char *line, t_global *global, int c);
-int check_error_sprite(char *line, t_global *global);
-int check_char_map(t_global *global);
-int check_error_map(t_global *global);
-int check_spawn(t_global *global);
-void    init_struct(t_global *global);
-int fill_and_checkerror(t_global *global, t_psing *psing);
-int parse(int ac, char **av, t_global *global, t_psing *psing);
-void    init_parse(t_global *global);
-int fill_map(t_psing *psing);
+int				check_error_r(char *line, int *c, t_global *global);
+int				check_error_fc(char *line, int *param, t_global *global, int c);
+int				check_error_texture(char *line, t_global *global, int c);
+int				check_error_sprite(char *line, t_global *global);
+int				check_char_map(t_global *global);
+int				check_error_map(t_global *global);
+int				check_spawn(t_global *global);
+void			init_struct(t_global *global);
+int				fill_and_checkerror(t_global *global, t_psing *psing);
+int				parse(int ac, char **av, t_global *global, t_psing *psing);
+void			init_parse(t_global *global);
+int				fill_map(t_psing *psing);
+int				check_r(t_global *global, t_psing *psing, int *i);
+int				check_f(t_global *global, t_psing *psing, int *i);
+int				check_c(t_global *global, t_psing *psing, int *i);
+int				check_no(t_global *global, t_psing *psing, int *i);
+int				check_so(t_global *global, t_psing *psing, int *i);
+int				check_we(t_global *global, t_psing *psing, int *i);
+int				check_ea(t_global *global, t_psing *psing, int *i);
+int				check_s(t_global *global, t_psing *psing, int *i);
 
 #endif
